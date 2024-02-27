@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('addExtension', () {
-    final extensible = Extensible();
+    final extensible = _Extensible();
     const messageId = 'messageId1';
     final message = Message('dummyChannel')..id = messageId;
 
@@ -22,7 +22,7 @@ void main() {
   });
 
   test('removeExtension', () {
-    final extensible = Extensible();
+    final extensible = _Extensible();
     const messageId = 'messageId1';
     final message = Message('dummyChannel')..id = messageId;
 
@@ -44,3 +44,5 @@ void main() {
     expect(newMessage.id, messageId);
   });
 }
+
+class _Extensible with Extensible {}

@@ -10,8 +10,7 @@ class NotificationFeedMeta extends Equatable {
     required this.unseenCount,
   });
 
-  factory NotificationFeedMeta.fromJson(Map json) =>
-      _$NotificationFeedMetaFromJson(json);
+  factory NotificationFeedMeta.fromJson(Map json) => _$NotificationFeedMetaFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificationFeedMetaToJson(this);
 

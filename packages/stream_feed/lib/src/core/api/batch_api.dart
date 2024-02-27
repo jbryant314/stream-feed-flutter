@@ -14,8 +14,7 @@ class BatchAPI {
   final StreamHttpClient _client;
 
   /// Add one activity to many feeds
-  Future<Response> addToMany(
-      Token token, Activity activity, Iterable<FeedId> feedIds) async {
+  Future<Response> addToMany(Token token, Activity activity, Iterable<FeedId> feedIds) async {
     checkArgument(feedIds.isNotEmpty, 'No feeds to add to');
     return _client.post(
       Routes.addToManyUrl,
@@ -28,10 +27,8 @@ class BatchAPI {
   }
 
   /// Follow multiple feeds
-  Future<Response> followMany(Token token, int activityCopyLimit,
-      Iterable<FollowRelation> follows) async {
-    checkArgument(
-        activityCopyLimit >= 0, 'Activity copy limit must be non negative');
+  Future<Response> followMany(Token token, int activityCopyLimit, Iterable<FollowRelation> follows) async {
+    checkArgument(activityCopyLimit >= 0, 'Activity copy limit must be non negative');
 
     checkArgument(follows.isNotEmpty, 'No feeds to follow');
     return _client.post(
@@ -43,8 +40,7 @@ class BatchAPI {
   }
 
   /// Unfollow multiple feeds
-  Future<Response> unfollowMany(
-      Token token, Iterable<UnFollowRelation> unfollows) async {
+  Future<Response> unfollowMany(Token token, Iterable<UnFollowRelation> unfollows) async {
     checkArgument(unfollows.isNotEmpty, 'No feeds to unfollow');
     return _client.post(
       Routes.unfollowManyUrl,
@@ -54,58 +50,46 @@ class BatchAPI {
   }
 
   /// Retrieve a batch of activities by a single id.
-  Future<List<Activity>> getActivitiesById(
-      Token token, Iterable<String> ids) async {
+  Future<List<Activity>> getActivitiesById(Token token, Iterable<String> ids) async {
     checkArgument(ids.isNotEmpty, 'No activities to get');
     final result = await _client.get<Map>(
       Routes.activitesUrl,
       headers: {'Authorization': '$token'},
       queryParameters: {'ids': ids.join(',')},
     );
-    final data = (result.data!['results'] as List)
-        .map((e) => Activity.fromJson(e))
-        .toList(growable: false);
+    final data = (result.data!['results'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
   /// Retrieve a batch of activities by a single foreign id.
-  Future<List<Activity>> getActivitiesByForeignId(
-      Token token, Iterable<ForeignIdTimePair> pairs) async {
+  Future<List<Activity>> getActivitiesByForeignId(Token token, Iterable<ForeignIdTimePair> pairs) async {
     checkArgument(pairs.isNotEmpty, 'No activities to get');
     final result = await _client.get(
       Routes.activitesUrl,
       headers: {'Authorization': '$token'},
       queryParameters: {
         'foreign_ids': pairs.map((it) => it.foreignID).join(','),
-        'timestamps':
-            pairs.map((it) => it.time.toUtc().toIso8601String()).join(','),
+        'timestamps': pairs.map((it) => it.time.toUtc().toIso8601String()).join(','),
       },
     );
-    final data = (result.data['results'] as List)
-        .map((e) => Activity.fromJson(e))
-        .toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
   /// Retrieve multiple enriched activities by a single id
-  Future<List<GenericEnrichedActivity<A, Ob, T, Or>>>
-      getEnrichedActivitiesById<A, Ob, T, Or>(
-          Token token, Iterable<String> ids) async {
+  Future<List<GenericEnrichedActivity<A, Ob, T, Or>>> getEnrichedActivitiesById<A, Ob, T, Or>(Token token, Iterable<String> ids) async {
     checkArgument(ids.isNotEmpty, 'No activities to get');
     final result = await _client.get(
       Routes.enrichedActivitiesUrl,
       headers: {'Authorization': '$token'},
       queryParameters: {'ids': ids.join(',')},
     );
-    final data = (result.data['results'] as List)
-        .map((e) => GenericEnrichedActivity<A, Ob, T, Or>.fromJson(e))
-        .toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(GenericEnrichedActivity<A, Ob, T, Or>.fromJson).toList(growable: false);
     return data;
   }
 
   /// Retrieve multiple enriched activities by a single foreign id
-  Future<List<GenericEnrichedActivity<A, Ob, T, Or>>>
-      getEnrichedActivitiesByForeignId<A, Ob, T, Or>(
+  Future<List<GenericEnrichedActivity<A, Ob, T, Or>>> getEnrichedActivitiesByForeignId<A, Ob, T, Or>(
     Token token,
     Iterable<ForeignIdTimePair> pairs,
   ) async {
@@ -115,19 +99,15 @@ class BatchAPI {
       headers: {'Authorization': '$token'},
       queryParameters: {
         'foreign_ids': pairs.map((it) => it.foreignID).join(','),
-        'timestamps':
-            pairs.map((it) => it.time.toUtc().toIso8601String()).join(','),
+        'timestamps': pairs.map((it) => it.time.toUtc().toIso8601String()).join(','),
       },
     );
-    final data = (result.data['results'] as List)
-        .map((e) => GenericEnrichedActivity<A, Ob, T, Or>.fromJson(e))
-        .toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(GenericEnrichedActivity<A, Ob, T, Or>.fromJson).toList(growable: false);
     return data;
   }
 
   /// Update multiple Activities
-  Future<Response> updateActivities(
-      Token token, Iterable<Activity> activities) async {
+  Future<Response> updateActivities(Token token, Iterable<Activity> activities) async {
     checkArgument(activities.isNotEmpty, 'No activities to update');
     return _client.post(
       Routes.activitesUrl,

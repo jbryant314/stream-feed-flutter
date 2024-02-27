@@ -24,8 +24,8 @@ class StreamHttpClient {
   })  : options = options ?? const StreamHttpClientOptions(),
         httpClient = dio ?? Dio() {
     httpClient
-      ..options.receiveTimeout = this.options.receiveTimeout.inMilliseconds
-      ..options.connectTimeout = this.options.connectTimeout.inMilliseconds
+      ..options.receiveTimeout = this.options.receiveTimeout
+      ..options.connectTimeout = this.options.connectTimeout
       ..options.queryParameters = {
         'api_key': apiKey,
         'location': this.options.group,
@@ -33,6 +33,7 @@ class StreamHttpClient {
       ..options.headers = {
         'stream-auth-type': 'jwt',
         'x-stream-client': this.options._userAgent,
+        'content-type': 'application/json',
       }
       ..interceptors.addAll([
         if (logger != null && logger.level != Level.OFF)
@@ -70,21 +71,20 @@ class StreamHttpClient {
   @visibleForTesting
   final Dio httpClient;
 
-  StreamFeedsNetworkError _parseError(DioError err) {
+  StreamFeedsNetworkError _parseError(DioException err) {
     StreamFeedsNetworkError error;
     // locally thrown dio error
-    if (err is StreamFeedsDioError) {
+    if (err is StreamFeedsDioException) {
       error = err.error;
     } else {
       // real network request dio error
-      error = StreamFeedsNetworkError.fromDioError(err);
+      error = StreamFeedsNetworkError.fromDioException(err);
     }
     return error..stackTrace = err.stackTrace;
   }
 
   /// Combines the base url with the [relativeUrl]
-  String enrichUrl(String relativeUrl, String serviceName) =>
-      '${options._getBaseUrl(serviceName)}/$relativeUrl';
+  String enrichUrl(String relativeUrl, String serviceName) => '${options._getBaseUrl(serviceName)}/$relativeUrl';
 
   /// Handy method to make an http GET request with error parsing.
   Future<Response<T>> get<T>(
@@ -100,7 +100,7 @@ class StreamHttpClient {
         options: Options(headers: headers?.nullProtected),
       );
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _parseError(error);
     }
   }
@@ -118,14 +118,9 @@ class StreamHttpClient {
   }) async {
     try {
       final response = await httpClient.post<T>(enrichUrl(path, serviceName),
-          queryParameters: queryParameters?.nullProtected,
-          data: data,
-          options: Options(headers: headers?.nullProtected),
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress,
-          cancelToken: cancelToken);
+          queryParameters: queryParameters?.nullProtected, data: data, options: Options(headers: headers?.nullProtected), onSendProgress: onSendProgress, onReceiveProgress: onReceiveProgress, cancelToken: cancelToken);
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _parseError(error);
     }
   }
@@ -144,7 +139,7 @@ class StreamHttpClient {
         options: Options(headers: headers?.nullProtected),
       );
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _parseError(error);
     }
   }
@@ -165,7 +160,7 @@ class StreamHttpClient {
         options: Options(headers: headers?.nullProtected),
       );
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _parseError(error);
     }
   }
@@ -186,31 +181,20 @@ class StreamHttpClient {
         options: Options(headers: headers?.nullProtected),
       );
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _parseError(error);
     }
   }
 
   /// Handy method to post files with error parsing.
   Future<Response<T>> postFile<T>(String path, MultipartFile file,
-      {String serviceName = 'api',
-      Map<String, Object?>? queryParameters,
-      Map<String, Object?>? headers,
-      OnSendProgress? onSendProgress,
-      OnReceiveProgress? onReceiveProgress,
-      CancelToken? cancelToken}) async {
+      {String serviceName = 'api', Map<String, Object?>? queryParameters, Map<String, Object?>? headers, OnSendProgress? onSendProgress, OnReceiveProgress? onReceiveProgress, CancelToken? cancelToken}) async {
     try {
       final formData = FormData.fromMap({'file': file});
       final response = await post<T>(path,
-          serviceName: serviceName,
-          data: formData,
-          queryParameters: queryParameters,
-          headers: headers,
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress,
-          cancelToken: cancelToken);
+          serviceName: serviceName, data: formData, queryParameters: queryParameters, headers: headers, onSendProgress: onSendProgress, onReceiveProgress: onReceiveProgress, cancelToken: cancelToken);
       return response;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _parseError(error);
     }
   }

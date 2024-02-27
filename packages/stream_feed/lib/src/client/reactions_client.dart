@@ -72,8 +72,7 @@ class ReactionsClient {
       data: data,
       targetFeeds: targetFeeds,
     );
-    final token =
-        userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.write);
     return _reactions.add(token, reaction);
   }
 
@@ -126,8 +125,7 @@ class ReactionsClient {
       data: data,
       targetFeeds: targetFeeds,
     );
-    final token =
-        userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.write);
     return _reactions.add(token, reaction);
   }
 
@@ -143,16 +141,14 @@ class ReactionsClient {
   ///
   /// API docs: [removing-reactions](https://getstream.io/activity-feeds/docs/flutter-dart/reactions_introduction/?language=dart#removing-reactions)
   Future<void> delete(String id) {
-    final token = userToken ??
-        TokenHelper.buildReactionToken(secret!, TokenAction.delete);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.delete);
     return _reactions.delete(token, id);
   }
 
   /// Get reaction
   /// [retrieving-reactions](https://getstream.io/activity-feeds/docs/flutter-dart/reactions_introduction/?language=dart#retrieving-reactions)
   Future<Reaction> get(String id) {
-    final token =
-        userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.read);
     return _reactions.get(token, id);
   }
 
@@ -179,8 +175,7 @@ class ReactionsClient {
       data: data,
       targetFeeds: targetFeeds,
     );
-    final token =
-        userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.write);
     return _reactions.update(token, reaction);
   }
 
@@ -212,8 +207,7 @@ class ReactionsClient {
     int? limit,
     String? kind,
   }) {
-    final token =
-        userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.read);
     final options = {
       'limit': limit ?? Default.limit,
       ...filter?.params ?? Default.filter.params,
@@ -243,8 +237,7 @@ class ReactionsClient {
     int? limit,
     String? kind,
   }) {
-    final token =
-        userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildReactionToken(secret!, TokenAction.read);
     return _reactions.paginatedFilter<A, Ob, T, Or>(
       token,
       lookupAttr,

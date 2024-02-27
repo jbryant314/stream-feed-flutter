@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:stream_feed/src/core/util/serializer.dart';
 import 'package:stream_feed/src/core/util/utc_converter.dart';
 
 part 'user.g.dart';
@@ -37,19 +36,19 @@ class User extends Equatable {
   final Map<String, Object?>? data;
 
   /// When the user was created.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final DateTime? createdAt;
 
   /// When the user was last updated.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final DateTime? updatedAt;
 
   /// Number of users that follow this user.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final int? followersCount;
 
   /// Number of users this user is following.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final int? followingCount;
 
   @override

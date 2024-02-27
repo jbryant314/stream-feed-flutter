@@ -30,9 +30,7 @@ class ForeignIdTimePair extends Equatable {
   ///
   static List<List> toList(List<ForeignIdTimePair>? pairs) {
     if (pairs == null || pairs.isEmpty) return [];
-    return pairs
-        .map((it) => [it.foreignID, it.time.toIso8601String()])
-        .toList(growable: false);
+    return pairs.map((it) => [it.foreignID, it.time.toIso8601String()]).toList(growable: false);
   }
 
   @override

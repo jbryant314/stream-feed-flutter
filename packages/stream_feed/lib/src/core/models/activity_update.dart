@@ -45,8 +45,7 @@ class ActivityUpdate extends Equatable {
       );
 
   /// Create a new instance from a JSON object
-  factory ActivityUpdate.fromJson(Map<String, dynamic> json) =>
-      _$ActivityUpdateFromJson(json);
+  factory ActivityUpdate.fromJson(Map<String, dynamic> json) => _$ActivityUpdateFromJson(json);
 
   /// The target activity ID.
   @JsonKey(includeIfNull: false)

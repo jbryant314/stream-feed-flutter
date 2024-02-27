@@ -4,14 +4,12 @@ import 'package:faye_dart/src/message.dart';
 
 typedef MessageHandler = Message Function(Message message);
 
-class Extensible {
+mixin Extensible {
   late final _extensions = Queue<Map<String, MessageHandler>>();
 
-  void addExtension(Map<String, MessageHandler> extension) =>
-      addExtensions([extension]);
+  void addExtension(Map<String, MessageHandler> extension) => addExtensions([extension]);
 
-  void addExtensions(Iterable<Map<String, MessageHandler>> extensions) =>
-      _extensions.addAll(extensions);
+  void addExtensions(Iterable<Map<String, MessageHandler>> extensions) => _extensions.addAll(extensions);
 
   void removeExtension(Map<String, MessageHandler> extension) {
     if (_extensions.isEmpty) return;

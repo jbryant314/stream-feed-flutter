@@ -17,8 +17,7 @@ class FollowStats extends Equatable {
   });
 
   /// Create a new instance from a JSON object
-  factory FollowStats.fromJson(Map<String, dynamic> json) =>
-      _$FollowStatsFromJson(json);
+  factory FollowStats.fromJson(Map<String, dynamic> json) => _$FollowStatsFromJson(json);
 
   final Following following;
   final Followers followers;
@@ -27,10 +26,8 @@ class FollowStats extends Equatable {
   Map<String, Object> toJson() => {
         'followers': followers.feed.toString(),
         'following': following.feed.toString(),
-        if (followers.slugs?.isNotEmpty == true)
-          'followers_slugs': followers.slugs!.join(','),
-        if (following.slugs?.isNotEmpty == true)
-          'following_slugs': following.slugs!.join(','),
+        if (followers.slugs?.isNotEmpty == true) 'followers_slugs': followers.slugs!.join(','),
+        if (following.slugs?.isNotEmpty == true) 'following_slugs': following.slugs!.join(','),
       };
 
   @override

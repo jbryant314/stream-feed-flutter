@@ -1,7 +1,8 @@
 import 'dart:async';
+
 import 'package:uuid/uuid.dart';
 
-class TimeoutHelper {
+mixin TimeoutHelper {
   final _uuid = const Uuid();
   late final _timers = <String, Timer>{};
 

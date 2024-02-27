@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('setTimeout', () {
-    final timeoutHelper = TimeoutHelper();
+    final timeoutHelper = _TimeoutHelper();
     expect(timeoutHelper.hasTimeouts, isFalse);
     timeoutHelper.setTimeout(const Duration(seconds: 3), () {});
     expect(timeoutHelper.hasTimeouts, isTrue);
@@ -12,7 +12,7 @@ void main() {
   });
 
   test('cancelTimeout', () {
-    final timeoutHelper = TimeoutHelper();
+    final timeoutHelper = _TimeoutHelper();
     expect(timeoutHelper.hasTimeouts, isFalse);
     final id = timeoutHelper.setTimeout(const Duration(seconds: 3), () {});
     expect(timeoutHelper.hasTimeouts, isTrue);
@@ -21,7 +21,7 @@ void main() {
   });
 
   test('cancelTimeouts', () {
-    final timeoutHelper = TimeoutHelper();
+    final timeoutHelper = _TimeoutHelper();
     expect(timeoutHelper.hasTimeouts, isFalse);
     timeoutHelper.setTimeout(const Duration(seconds: 3), () {});
     timeoutHelper.setTimeout(const Duration(seconds: 6), () {});
@@ -31,3 +31,5 @@ void main() {
     expect(timeoutHelper.hasTimeouts, isFalse);
   });
 }
+
+class _TimeoutHelper with TimeoutHelper {}

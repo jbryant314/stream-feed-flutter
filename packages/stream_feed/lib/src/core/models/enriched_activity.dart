@@ -66,20 +66,12 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
   ]) =>
       _$GenericEnrichedActivityFromJson<A, Ob, T, Or>(
         Serializer.moveKeysToRoot(json, topLevelFields)!,
-        fromJsonA ??
-            (jsonA) => (A == User)
-                ? User.fromJson(jsonA! as Map<String, dynamic>) as A
-                : jsonA as A,
+        fromJsonA ?? (jsonA) => (A == User) ? User.fromJson(jsonA! as Map<String, dynamic>) as A : jsonA as A,
         fromJsonOb ??
-            (jsonOb) => (Ob ==
-                    CollectionEntry) // TODO: can be a list of collection entry and a list of activities
-                ? CollectionEntry.fromJson(jsonOb! as Map<String, dynamic>)
-                    as Ob
+            (jsonOb) => (Ob == CollectionEntry) // TODO: can be a list of collection entry and a list of activities
+                ? CollectionEntry.fromJson(jsonOb! as Map<String, dynamic>) as Ob
                 : jsonOb as Ob,
-        fromJsonT ??
-            (jsonT) => (T == Activity)
-                ? Activity.fromJson(jsonT! as Map<String, dynamic>) as T
-                : jsonT as T,
+        fromJsonT ?? (jsonT) => (T == Activity) ? Activity.fromJson(jsonT! as Map<String, dynamic>) as T : jsonT as T,
         fromJsonOr ??
             (jsonOr) {
               if (Or == User) {
@@ -93,7 +85,7 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
       );
 
   /// The Stream id of the activity.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final String? id;
 
   /// The actor performing the activity.
@@ -149,31 +141,31 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
   /// should be copied.
   ///
   /// One way to think about it is as the CC functionality of email.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final List<String>? to;
 
   ///
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final double? score;
 
   ///
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, Object>? analytics;
 
   ///
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, Object>? extraContext;
 
   /// Include reaction counts to activities.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, int>? reactionCounts;
 
   /// Include reactions added by current user to all activities.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, List<Reaction>>? ownReactions;
 
   /// Include recent reactions to activities.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, List<Reaction>>? latestReactions;
 
   /// Map of custom user extraData
@@ -264,8 +256,5 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
     Object? Function(T value) toJsonT,
     Object? Function(Or value) toJsonOr,
   ) =>
-      Serializer.moveKeysToMapInPlace(
-          _$GenericEnrichedActivityToJson(
-              this, toJsonA, toJsonOb, toJsonT, toJsonOr),
-          topLevelFields);
+      Serializer.moveKeysToMapInPlace(_$GenericEnrichedActivityToJson(this, toJsonA, toJsonOb, toJsonT, toJsonOr), topLevelFields);
 }

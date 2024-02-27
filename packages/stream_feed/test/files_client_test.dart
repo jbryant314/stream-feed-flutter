@@ -17,8 +17,7 @@ void main() {
       final attachment = AttachmentFile(path: 'dummyPath');
 
       const fileUrl = 'dummyFileUrl';
-      when(() => api.upload(token, attachment))
-          .thenAnswer((_) async => fileUrl);
+      when(() => api.upload(token, attachment)).thenAnswer((_) async => fileUrl);
 
       final res = await client.upload(attachment);
       expect(res, fileUrl);
@@ -29,8 +28,7 @@ void main() {
     test('refreshUrl', () async {
       const targetUrl = 'targetUrl';
 
-      when(() => api.refreshUrl(token, targetUrl))
-          .thenAnswer((invocation) async => targetUrl);
+      when(() => api.refreshUrl(token, targetUrl)).thenAnswer((invocation) async => targetUrl);
 
       expect(await client.refreshUrl(targetUrl), targetUrl);
       verify(() => api.refreshUrl(token, targetUrl)).called(1);
@@ -38,12 +36,7 @@ void main() {
 
     test('delete', () async {
       const targetUrl = 'targetUrl';
-      when(() => api.delete(token, targetUrl)).thenAnswer((_) async => Response(
-          data: {},
-          requestOptions: RequestOptions(
-            path: '',
-          ),
-          statusCode: 200));
+      when(() => api.delete(token, targetUrl)).thenAnswer((_) async => Response(data: {}, requestOptions: RequestOptions(), statusCode: 200));
       await client.delete(targetUrl);
       verify(() => api.delete(token, targetUrl)).called(1);
     });

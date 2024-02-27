@@ -19,11 +19,9 @@ class CollectionsAPI {
   ///
   /// Note: If a collection object with the same ID already exists,
   /// the request will error with code 409 Conflict.
-  Future<CollectionEntry> add(
-      Token token, String? userId, CollectionEntry entry) async {
+  Future<CollectionEntry> add(Token token, String? userId, CollectionEntry entry) async {
     checkNotNull(entry.collection, "Collection name can't be null");
-    checkArgument(
-        entry.collection!.isNotEmpty, "Collection name can't be empty");
+    checkArgument(entry.collection!.isNotEmpty, "Collection name can't be empty");
     checkNotNull(entry.data, "Collection data can't be null");
     final result = await _client.post<Map<String, dynamic>>(
       Routes.buildCollectionsUrl(entry.collection),
@@ -40,8 +38,7 @@ class CollectionsAPI {
   /// Deletes a single entry from a collection.
   ///
   /// Returns an empty response on success.
-  Future<Response> delete(
-      Token token, String collection, String entryId) async {
+  Future<Response> delete(Token token, String collection, String entryId) async {
     checkArgument(collection.isNotEmpty, "Collection name can't be empty");
     checkArgument(entryId.isNotEmpty, "Collection id can't be empty");
     return _client.delete(
@@ -51,8 +48,7 @@ class CollectionsAPI {
   }
 
   /// Removes all objects by id from the collection.
-  Future<Response> deleteMany(
-      Token token, String collection, Iterable<String> entryIds) async {
+  Future<Response> deleteMany(Token token, String collection, Iterable<String> entryIds) async {
     checkArgument(collection.isNotEmpty, "Collection name can't be empty");
     checkArgument(entryIds.isNotEmpty, "Collection ids can't be empty");
     return _client.delete(
@@ -66,8 +62,7 @@ class CollectionsAPI {
   }
 
   /// Gets a single item from a collection and syncs its data.
-  Future<CollectionEntry> get(
-      Token token, String collection, String entryId) async {
+  Future<CollectionEntry> get(Token token, String collection, String entryId) async {
     checkArgument(collection.isNotEmpty, "Collection name can't be empty");
     checkArgument(entryId.isNotEmpty, "Collection id can't be empty");
     final result = await _client.get<Map<String, dynamic>>(
@@ -78,8 +73,7 @@ class CollectionsAPI {
   }
 
   /// Selects all objects with ids from the collection.
-  Future<List<CollectionEntry>> select(
-      Token token, String collection, Iterable<String> entryIds) async {
+  Future<List<CollectionEntry>> select(Token token, String collection, Iterable<String> entryIds) async {
     checkArgument(collection.isNotEmpty, "Collection name can't be empty");
     checkArgument(entryIds.isNotEmpty, "Collection ids can't be empty");
     final result = await _client.get<Map>(
@@ -89,19 +83,15 @@ class CollectionsAPI {
         'foreign_ids': entryIds.map((id) => '$collection:$id').join(','),
       },
     );
-    final data = (result.data!['response']['data'] as List)
-        .map((e) => CollectionEntry.fromJson(e))
-        .toList(growable: false);
+    final data = (result.data!['response']['data'] as List<Map<String, dynamic>>).map(CollectionEntry.fromJson).toList(growable: false);
     return data;
   }
 
   /// Updates a single item in the object storage.
-  Future<CollectionEntry> update(
-      Token token, String? userId, CollectionEntry entry) async {
+  Future<CollectionEntry> update(Token token, String? userId, CollectionEntry entry) async {
     checkNotNull(entry, "Collection can't be null");
     checkNotNull(entry.collection, "Collection name can't be null");
-    checkArgument(
-        entry.collection!.isNotEmpty, "Collection name can't be empty");
+    checkArgument(entry.collection!.isNotEmpty, "Collection name can't be empty");
     final result = await _client.put<Map<String, dynamic>>(
       Routes.buildCollectionsUrl('${entry.collection}/${entry.id}/'),
       headers: {'Authorization': '$token'},
@@ -129,9 +119,7 @@ class CollectionsAPI {
       },
     );
 
-    final data = (response.data!['data'][collection] as List)
-        .map((e) => CollectionEntry.fromJson(e))
-        .toList(growable: false);
+    final data = (response.data!['data'][collection] as List<Map<String, dynamic>>).map(CollectionEntry.fromJson).toList(growable: false);
     return data;
   }
 }

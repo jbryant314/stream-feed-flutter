@@ -48,7 +48,7 @@ void main() {
         final updatedImpression = impression.copyWith(userData: userData);
         when(() => api.trackImpressions(token, [updatedImpression])).thenAnswer(
           (_) async => Response(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             statusCode: 200,
           ),
         );
@@ -58,8 +58,7 @@ void main() {
         // expect(resp, isNotNull);
         // expect(resp.statusCode, 200);
 
-        verify(() => api.trackImpressions(token, [updatedImpression]))
-            .called(1);
+        verify(() => api.trackImpressions(token, [updatedImpression])).called(1);
       },
     );
   });
@@ -89,15 +88,14 @@ void main() {
         final updatedEngagement = engagement.copyWith(userData: userData);
         when(() => api.trackEngagements(token, [updatedEngagement])).thenAnswer(
           (_) async => Response(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             statusCode: 200,
           ),
         );
 
         await client.trackEngagement(updatedEngagement);
 
-        verify(() => api.trackEngagements(token, [updatedEngagement]))
-            .called(1);
+        verify(() => api.trackEngagements(token, [updatedEngagement])).called(1);
       },
     );
   });

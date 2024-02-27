@@ -13,8 +13,7 @@ class Followers extends Equatable {
   const Followers({required this.feed, this.count, this.slugs});
 
   /// Builds a [Followers] from a JSON object.
-  factory Followers.fromJson(Map<String, dynamic> json) =>
-      _$FollowersFromJson(json);
+  factory Followers.fromJson(Map<String, dynamic> json) => _$FollowersFromJson(json);
 
   @JsonKey(fromJson: _fromId, toJson: FeedId.toId)
   final FeedId feed;

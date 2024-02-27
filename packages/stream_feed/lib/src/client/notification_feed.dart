@@ -53,13 +53,8 @@ class NotificationFeed extends AggregatedFeed {
 
   /// Retrieves one activity from a feed
   @override
-  Future<NotificationGroup<Activity>> getActivityDetail(
-      String activityId) async {
-    final activities = await getActivities(
-        limit: 1,
-        filter: Filter()
-            .idLessThanOrEqual(activityId)
-            .idGreaterThanOrEqual(activityId));
+  Future<NotificationGroup<Activity>> getActivityDetail(String activityId) async {
+    final activities = await getActivities(limit: 1, filter: Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId));
     return activities.first;
   }
 
@@ -89,13 +84,9 @@ class NotificationFeed extends AggregatedFeed {
       ...filter?.params ?? Default.filter.params,
       ...marker?.params ?? Default.marker.params,
     };
-    final token = userToken ??
-        TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
+    final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getActivities(token, feedId, options);
-    final data = (result.data!['results'] as List)
-        .map((e) => NotificationGroup.fromJson(
-            e, (json) => Activity.fromJson(json as Map<String, dynamic>?)))
-        .toList(growable: false);
+    final data = (result.data!['results'] as List).map((e) => NotificationGroup.fromJson(e, (json) => Activity.fromJson(json as Map<String, dynamic>?))).toList(growable: false);
     return data;
   }
 
@@ -109,8 +100,7 @@ class NotificationFeed extends AggregatedFeed {
       ...filter?.params ?? Default.filter.params,
       ...marker?.params ?? Default.marker.params,
     };
-    final token = userToken ??
-        TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
+    final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getActivities(token, feedId, options);
     return NotificationFeedMeta.fromJson(result.data!);
   }
@@ -119,8 +109,7 @@ class NotificationFeed extends AggregatedFeed {
   ///
   /// {@macro filter}
   @override
-  Future<List<NotificationGroup<GenericEnrichedActivity<A, Ob, T, Or>>>>
-      getEnrichedActivities<A, Ob, T, Or>({
+  Future<List<NotificationGroup<GenericEnrichedActivity<A, Ob, T, Or>>>> getEnrichedActivities<A, Ob, T, Or>({
     int? limit,
     int? offset,
     String? session,
@@ -135,8 +124,7 @@ class NotificationFeed extends AggregatedFeed {
       ...marker?.params ?? Default.marker.params,
       ...flags?.params ?? Default.enrichmentFlags.params,
     };
-    final token = userToken ??
-        TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
+    final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getEnrichedActivities(token, feedId, options);
     final data = (result.data['results'] as List)
         .map((e) => NotificationGroup.fromJson(

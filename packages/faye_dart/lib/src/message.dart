@@ -18,14 +18,12 @@ class Message with EquatableMixin {
   factory Message.fromJson(Map<String, Object?> json) {
     final advice = json['advice'] as Map<String, dynamic>?;
     final message = Message(
-      json['channel'] as String,
+      json['channel']! as String,
       clientId: json['clientId'] as String?,
       connectionType: json['connectionType'] as String?,
       version: json['version'] as String?,
       minimumVersion: json['minimumVersion'] as String?,
-      supportedConnectionTypes: (json['supportedConnectionTypes'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
+      supportedConnectionTypes: (json['supportedConnectionTypes'] as List?)?.map((e) => e as String).toList(),
       advice: advice == null ? null : Advice.fromJson(advice),
       successful: json['successful'] as bool?,
       subscription: json['subscription'] as String?,

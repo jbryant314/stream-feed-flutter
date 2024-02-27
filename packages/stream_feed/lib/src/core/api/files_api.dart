@@ -13,8 +13,7 @@ class FilesAPI {
   final StreamHttpClient _client;
 
   /// Upload a File instance or a readable stream of data
-  Future<String?> upload(Token token, AttachmentFile file,
-      {OnSendProgress? onSendProgress, CancelToken? cancelToken}) async {
+  Future<String?> upload(Token token, AttachmentFile file, {OnSendProgress? onSendProgress, CancelToken? cancelToken}) async {
     final multiPartFile = await file.toMultipartFile();
     final result = await _client.postFile<Map>(
       Routes.filesUrl,
@@ -35,8 +34,7 @@ class FilesAPI {
 
   /// {@macro filesRefreshUrl}
   Future<String?> refreshUrl(Token token, String targetUrl) async {
-    final result = await _client.post(Routes.filesUrl,
-        headers: {'Authorization': '$token'}, data: {'url': targetUrl});
+    final result = await _client.post(Routes.filesUrl, headers: {'Authorization': '$token'}, data: {'url': targetUrl});
     return result.data['url'];
   }
 }

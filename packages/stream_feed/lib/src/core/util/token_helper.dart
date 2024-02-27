@@ -100,8 +100,7 @@ class TokenHelper {
     TokenAction action, [
     FeedId? feed,
   ]) =>
-      _buildBackendToken(
-          secret, TokenResource.feed, action, feed?.claim ?? '*');
+      _buildBackendToken(secret, TokenResource.feed, action, feed?.claim ?? '*');
 
   /// Build Feed Token
   static Token buildAnalyticsToken(
@@ -109,8 +108,7 @@ class TokenHelper {
     TokenAction action, [
     FeedId? feed,
   ]) =>
-      _buildBackendToken(
-          secret, TokenResource.analytics, action, feed?.claim ?? '*');
+      _buildBackendToken(secret, TokenResource.analytics, action, feed?.claim ?? '*');
 
   /// Build Follow Token
   static Token buildFollowToken(
@@ -118,48 +116,34 @@ class TokenHelper {
     TokenAction action, [
     FeedId? feed,
   ]) =>
-      _buildBackendToken(
-          secret, TokenResource.follower, action, feed?.claim ?? '*');
+      _buildBackendToken(secret, TokenResource.follower, action, feed?.claim ?? '*');
 
   /// Build Personalization Token
-  static Token buildAnyToken(String secret, TokenAction action,
-          {String? userId}) =>
-      _buildBackendToken(secret, TokenResource.any, action, '*',
-          userId: userId);
+  static Token buildAnyToken(String secret, TokenAction action, {String? userId}) => _buildBackendToken(secret, TokenResource.any, action, '*', userId: userId);
 
   /// Build Personalization Token
-  static Token buildPersonalizationToken(String secret, TokenAction action,
-          {String? userId}) =>
-      _buildBackendToken(secret, TokenResource.personalization, action, '*',
-          userId: userId);
+  static Token buildPersonalizationToken(String secret, TokenAction action, {String? userId}) => _buildBackendToken(secret, TokenResource.personalization, action, '*', userId: userId);
 
   /// Build Reaction Token
-  static Token buildReactionToken(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.reactions, action, '*');
+  static Token buildReactionToken(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.reactions, action, '*');
 
   /// Build Analytics Token
-  static Token buildAnalytics(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.analytics, action, '*');
+  static Token buildAnalytics(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.analytics, action, '*');
 
   /// Build Analytics Redirect Token
-  static Token buildAnalyticsRedirect(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.analyticsRedirect, action, '*');
+  static Token buildAnalyticsRedirect(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.analyticsRedirect, action, '*');
 
   /// Build Activity Token
-  static Token buildActivityToken(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.activities, action, '*');
+  static Token buildActivityToken(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.activities, action, '*');
 
   /// Build Users Token
-  static Token buildUsersToken(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.users, action, '*');
+  static Token buildUsersToken(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.users, action, '*');
 
   /// Build Collections Token
-  static Token buildCollectionsToken(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.collections, action, '*');
+  static Token buildCollectionsToken(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.collections, action, '*');
 
   /// Build Open Graph Token
-  static Token buildOpenGraphToken(String secret) => _buildBackendToken(
-      secret, TokenResource.openGraph, TokenAction.read, '*');
+  static Token buildOpenGraphToken(String secret) => _buildBackendToken(secret, TokenResource.openGraph, TokenAction.read, '*');
 
   /// Build To Target Update Token
   static Token buildToTargetUpdateToken(
@@ -167,12 +151,10 @@ class TokenHelper {
     TokenAction action, [
     FeedId? feed,
   ]) =>
-      _buildBackendToken(
-          secret, TokenResource.feedTargets, action, feed?.claim ?? '*');
+      _buildBackendToken(secret, TokenResource.feedTargets, action, feed?.claim ?? '*');
 
   /// Build Files Token
-  static Token buildFilesToken(String secret, TokenAction action) =>
-      _buildBackendToken(secret, TokenResource.files, action, '*');
+  static Token buildFilesToken(String secret, TokenAction action) => _buildBackendToken(secret, TokenResource.files, action, '*');
 
   /// Build Frontend Token
   static Token buildFrontendToken(
@@ -184,8 +166,7 @@ class TokenHelper {
       'user_id': userId,
     };
 
-    return Token(
-        issueJwtHS256(secret: secret, expiresAt: expiresAt, claims: claims));
+    return Token(issueJwtHS256(secret: secret, expiresAt: expiresAt, claims: claims));
   }
 
   /// Creates the JWT for [feedId], [resource] and [action]
@@ -211,8 +192,7 @@ class TokenHelper {
 }
 
 /// Decode the JWT
-JsonWebToken jwtDecode(Token userToken) =>
-    JsonWebToken.unverified(userToken.token);
+JsonWebToken jwtDecode(Token userToken) => JsonWebToken.unverified(userToken.token);
 
 /// Issues a JWT issue signed with HS256
 String issueJwtHS256({

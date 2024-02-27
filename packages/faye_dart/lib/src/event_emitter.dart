@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+
 import 'package:meta/meta.dart';
 
 /// A listener that can be added to a [EventEmitter] using
@@ -15,7 +16,7 @@ typedef Listener<T> = void Function(T data);
 /// It exists merely for error reporting, and should not be used otherwise.
 typedef ErrorListener = void Function(Object error, StackTrace? stackTrace);
 
-class EventEmitter<T> {
+mixin EventEmitter<T> {
   /// Mapping of events to a list of event handlers
   late final _events = <String, LinkedList<_ListenerEntry<T>>>{};
 
@@ -80,12 +81,10 @@ class EventEmitter<T> {
   }
 
   /// Binds the [listener] to the passed [event] to be invoked at most [limit].
-  void on(String event, Listener<T> listener, {int? limit}) =>
-      addListener(event, listener, limit: limit);
+  void on(String event, Listener<T> listener, {int? limit}) => addListener(event, listener, limit: limit);
 
   /// Binds the [listener] to the passed [event] to be invoked at most once.
-  void once(String event, Listener<T> listener) =>
-      addListener(event, listener, limit: 1);
+  void once(String event, Listener<T> listener) => addListener(event, listener, limit: 1);
 
   /// Binds the [listener] to the passed [event] to be invoked at most [limit].
   void addListener(String event, Listener<T> listener, {int? limit}) {
@@ -127,7 +126,7 @@ class EventEmitter<T> {
     assert(_debugIsMounted(), '');
     final listeners = _events[event];
     if (listeners == null) {
-      throw 'Event not available';
+      throw Exception('Event not available');
     }
     return listeners.isNotEmpty;
   }
@@ -144,7 +143,7 @@ class EventEmitter<T> {
   }
 }
 
-class _ListenerEntry<T> extends LinkedListEntry<_ListenerEntry<T>> {
+final class _ListenerEntry<T> extends LinkedListEntry<_ListenerEntry<T>> {
   _ListenerEntry(this.listener, {this.limit});
 
   int? limit;

@@ -34,8 +34,7 @@ class CollectionEntry extends Equatable {
   });
 
   /// Create a new instance from a JSON object
-  factory CollectionEntry.fromJson(Map<String, dynamic> json) =>
-      _$CollectionEntryFromJson(json);
+  factory CollectionEntry.fromJson(Map<String, dynamic> json) => _$CollectionEntryFromJson(json);
 
   /// Collection object ID
   final String? id;

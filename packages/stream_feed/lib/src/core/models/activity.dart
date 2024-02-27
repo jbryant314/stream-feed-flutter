@@ -36,8 +36,7 @@ class Activity extends Equatable {
   });
 
   /// Create a new [Activity] instance from a JSON object.
-  factory Activity.fromJson(Map<String, dynamic>? json) =>
-      _$ActivityFromJson(Serializer.moveKeysToRoot(json, topLevelFields)!);
+  factory Activity.fromJson(Map<String, dynamic>? json) => _$ActivityFromJson(Serializer.moveKeysToRoot(json, topLevelFields)!);
 
   /// Provides a permanent, universally unique identifier for the activity in
   /// the form of an absolute IRI.
@@ -191,8 +190,7 @@ class Activity extends Equatable {
   ];
 
   /// Serialize to json
-  Map<String, dynamic> toJson() =>
-      Serializer.moveKeysToMapInPlace(_$ActivityToJson(this), topLevelFields);
+  Map<String, dynamic> toJson() => Serializer.moveKeysToMapInPlace(_$ActivityToJson(this), topLevelFields);
 
   /// Copies this [Activity] to a new instance.
   Activity copyWith({

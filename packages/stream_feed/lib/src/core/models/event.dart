@@ -12,8 +12,7 @@ class UserData extends Equatable {
   const UserData(this.id, this.alias);
 
   /// Create a new instance from a JSON object.
-  factory UserData.fromJson(Map<String, dynamic> json) =>
-      _$UserDataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
 
   /// The id of the user.
   final String id;
@@ -37,8 +36,7 @@ class Feature extends Equatable {
   const Feature(this.group, this.value);
 
   /// Create a new instance from a json
-  factory Feature.fromJson(Map<String, dynamic> json) =>
-      _$FeatureFromJson(json);
+  factory Feature.fromJson(Map<String, dynamic> json) => _$FeatureFromJson(json);
 
   /// The group of the feature.
   final String group;
@@ -150,8 +148,7 @@ class Engagement extends Event {
         );
 
   /// Create a new instance from a json
-  factory Engagement.fromJson(Map<String, dynamic> json) =>
-      _$EngagementFromJson(json);
+  factory Engagement.fromJson(Map<String, dynamic> json) => _$EngagementFromJson(json);
 
   /// The ID of the content that the user clicked
   /// Activity ID
@@ -237,8 +234,7 @@ class Impression extends Event {
         );
 
   /// Create a new instance from a JSON object.
-  factory Impression.fromJson(Map<String, dynamic> json) =>
-      _$ImpressionFromJson(json);
+  factory Impression.fromJson(Map<String, dynamic> json) => _$ImpressionFromJson(json);
 
   /// The list of content the user is looking at.
   ///
@@ -291,8 +287,7 @@ class Content extends Equatable {
   const Content({required this.foreignId, this.data});
 
   /// Create a new instance from a JSON object
-  factory Content.fromJson(Map<String, dynamic> json) =>
-      _$ContentFromJson(json);
+  factory Content.fromJson(Map<String, dynamic> json) => _$ContentFromJson(json);
 
   /// Add a `foreign_id` to the Content.
   @JsonKey(toJson: FeedId.toId, fromJson: FeedId.fromId)

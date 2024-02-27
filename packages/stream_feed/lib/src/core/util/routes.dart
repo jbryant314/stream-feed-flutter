@@ -7,8 +7,7 @@ class Routes {
   static const _activitiesPath = 'activities';
   static const _personalizationPath = 'personalization';
   static const _enrichPersonalizationPath = 'enrich/personalization';
-  static const _personalizationFeedPath =
-      '$_enrichPersonalizationPath/$_feedPath';
+  static const _personalizationFeedPath = '$_enrichPersonalizationPath/$_feedPath';
   static const _enrichActivitiesPath = 'enrich/$_activitiesPath';
   static const _activityUpdatePath = 'activity';
   static const _reactionsPath = 'reaction';
@@ -24,32 +23,26 @@ class Routes {
   static const _statsFollowPath = 'stats/follow/';
 
   /// Handy method to build a url for a feed resource for a given path and feed
-  static String buildFeedUrl(FeedId feed, [String path = '']) =>
-      '$_feedPath/${feed.slug}/${feed.userId}/$path';
+  static String buildFeedUrl(FeedId feed, [String path = '']) => '$_feedPath/${feed.slug}/${feed.userId}/$path';
 
   /// Handy method to build a url for a personalization resource for a given
   /// path and resource
-  static String buildPersonalizationURL(String resource, [String path = '']) =>
-      '$_personalizationPath/$_feedPath/$resource/$path';
+  static String buildPersonalizationURL(String resource, [String path = '']) => '$_personalizationPath/$_feedPath/$resource/$path';
 
   /// Handy method to build a url for an enriched feed resource for a given path
   /// and feed
-  static String buildEnrichedFeedUrl(FeedId feed, [String path = '']) =>
-      '$_enrichedFeedPath/${feed.slug}/${feed.userId}/$path';
+  static String buildEnrichedFeedUrl(FeedId feed, [String path = '']) => '$_enrichedFeedPath/${feed.slug}/${feed.userId}/$path';
 
   static String get enrichedActivitiesUrl => _enrichActivitiesPath;
 
   /// Handy method to build a url for a Collection resource for a given path
-  static String buildCollectionsUrl([String? path = '']) =>
-      '$_collectionsPath/$path';
+  static String buildCollectionsUrl([String? path = '']) => '$_collectionsPath/$path';
 
   /// Handy method to build a url for a Reaction resource for a given path
-  static String buildReactionsUrl([String path = '']) =>
-      '$_reactionsPath/$path';
+  static String buildReactionsUrl([String path = '']) => '$_reactionsPath/$path';
 
   /// Handy method to build a url for a Refresh CDN resource for a given path
-  static String buildRefreshCDNUrl([String? path = '']) =>
-      '$path/$_refreshPath/';
+  static String buildRefreshCDNUrl([String? path = '']) => '$path/$_refreshPath/';
 
   /// Handy method to build a URL for the users resource for a given path
   static String buildUsersUrl([String path = '']) => '$_usersPath/$path';

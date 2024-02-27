@@ -65,10 +65,8 @@ class ImageStorageClient {
     OnSendProgress? onSendProgress,
     CancelToken? cancelToken,
   }) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.write);
-    return _images.upload(token, image,
-        onSendProgress: onSendProgress, cancelToken: cancelToken);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.write);
+    return _images.upload(token, image, onSendProgress: onSendProgress, cancelToken: cancelToken);
   }
 
   /// Images can be deleted using their URL.
@@ -79,8 +77,7 @@ class ImageStorageClient {
   /// client.images.delete(imageURL);
   /// ```
   Future<void> delete(String url) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.delete);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.delete);
     return _images.delete(token, url);
   }
 
@@ -90,14 +87,12 @@ class ImageStorageClient {
   /// client.images.get(imageURL);
   /// ```
   Future<String?> get(String url) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
     return _images.get(token, url);
   }
 
   Future<String?> _process(String url, Map<String, Object?> params) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
     return _images.get(token, url, options: params);
   }
 
@@ -111,8 +106,7 @@ class ImageStorageClient {
   ///   const Crop(50, 50),
   /// );
   /// ```
-  Future<String?> getCropped(String url, Crop crop) =>
-      _process(url, crop.params);
+  Future<String?> getCropped(String url, Crop crop) => _process(url, crop.params);
 
   /// Resize an image using its URL. A new URL is then returned by the API.
   /// # Examples:
@@ -123,12 +117,10 @@ class ImageStorageClient {
   ///   const Resize(50, 50),
   /// );
   /// ```
-  Future<String?> getResized(String url, Resize resize) =>
-      _process(url, resize.params);
+  Future<String?> getResized(String url, Resize resize) => _process(url, resize.params);
 
   ///Generate a thumbnail for a given image url
-  Future<String?> thumbnail(String url, Thumbnail thumbnail) =>
-      _process(url, thumbnail.params);
+  Future<String?> thumbnail(String url, Thumbnail thumbnail) => _process(url, thumbnail.params);
 
   /// {@template imageRefreshUrl}
   /// Explicitly refresh CDN urls for uploaded images on the Stream CDN
@@ -138,8 +130,7 @@ class ImageStorageClient {
   /// contact us.
   /// {@endtemplate}
   Future<String?> refreshUrl(String targetUrl) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
     return _images.refreshUrl(token, targetUrl);
   }
 }

@@ -17,8 +17,7 @@ void main() {
 
     test('get', () async {
       const url = 'url';
-      when(() => api.get(token, url))
-          .thenAnswer((invocation) async => 'whatever');
+      when(() => api.get(token, url)).thenAnswer((invocation) async => 'whatever');
 
       expect(await client.get(url), 'whatever');
       verify(() => api.get(token, url)).called(1);
@@ -27,8 +26,7 @@ void main() {
     test('getCropped', () async {
       const url = 'url';
       const crop = Crop(50, 50);
-      when(() => api.get(token, url, options: crop.params))
-          .thenAnswer((invocation) async => 'whatever');
+      when(() => api.get(token, url, options: crop.params)).thenAnswer((invocation) async => 'whatever');
 
       expect(await client.getCropped(url, crop), 'whatever');
       verify(() => api.get(token, url, options: crop.params)).called(1);
@@ -37,8 +35,7 @@ void main() {
     test('getResized', () async {
       const url = 'url';
       const resize = Resize(50, 50);
-      when(() => api.get(token, url, options: resize.params))
-          .thenAnswer((invocation) async => 'whatever');
+      when(() => api.get(token, url, options: resize.params)).thenAnswer((invocation) async => 'whatever');
 
       expect(await client.getResized(url, resize), 'whatever');
       verify(() => api.get(token, url, options: resize.params)).called(1);
@@ -47,8 +44,7 @@ void main() {
     test('refreshUrl', () async {
       const targetUrl = 'targetUrl';
 
-      when(() => api.refreshUrl(token, targetUrl))
-          .thenAnswer((invocation) async => targetUrl);
+      when(() => api.refreshUrl(token, targetUrl)).thenAnswer((invocation) async => targetUrl);
 
       expect(await client.refreshUrl(targetUrl), targetUrl);
       verify(() => api.refreshUrl(token, targetUrl)).called(1);
@@ -58,8 +54,7 @@ void main() {
       final attachment = AttachmentFile(path: 'dummyPath');
 
       const fileUrl = 'dummyFileUrl';
-      when(() => api.upload(token, attachment))
-          .thenAnswer((_) async => fileUrl);
+      when(() => api.upload(token, attachment)).thenAnswer((_) async => fileUrl);
 
       final res = await client.upload(attachment);
       expect(res, fileUrl);
@@ -69,12 +64,13 @@ void main() {
 
     test('delete', () async {
       const targetUrl = 'targetUrl';
-      when(() => api.delete(token, targetUrl)).thenAnswer((_) async => Response(
+      when(() => api.delete(token, targetUrl)).thenAnswer(
+        (_) async => Response(
           data: {},
-          requestOptions: RequestOptions(
-            path: '',
-          ),
-          statusCode: 200));
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
       await client.delete(targetUrl);
       verify(() => api.delete(token, targetUrl)).called(1);
     });

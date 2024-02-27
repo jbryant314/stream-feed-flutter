@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('`on` should emit until removed', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const event = 'click';
     String? emittedData;
     eventEmitter.on(event, (data) => emittedData = data);
@@ -27,7 +27,7 @@ void main() {
   });
 
   test('`once` should emit only once', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const event = 'click';
     String? emittedData;
     eventEmitter.once(event, (data) => emittedData = data);
@@ -45,7 +45,7 @@ void main() {
   });
 
   test('`removeListener` should remove the listener', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const event = 'click';
     String? emittedData;
     void listener(String data) => emittedData = data;
@@ -67,7 +67,7 @@ void main() {
   });
 
   test('`off` should remove all the listener of a particular event', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const event = 'click';
     String? emittedDataOne;
     String? emittedDataTwo;
@@ -96,7 +96,7 @@ void main() {
   });
 
   test('`removeAllListeners` should remove all the listener of all events', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const clickEvent = 'click';
     const touchEvent = 'touch';
     String? clickData;
@@ -129,7 +129,7 @@ void main() {
   });
 
   test('`hasListeners` should work correctly', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const clickEvent = 'click';
     eventEmitter.on(clickEvent, (_) {});
 
@@ -141,7 +141,7 @@ void main() {
   });
 
   test('should throw stateError if used after dispose is called', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const clickEvent = 'click';
     String? clickData;
     eventEmitter.on(clickEvent, (data) => clickData = data);
@@ -163,7 +163,7 @@ void main() {
 
   test('onError (initial)', () {
     final onError = ErrorListener();
-    final eventEmitter = EventEmitter<String>()..onError = onError;
+    final eventEmitter = _EventEmitter<String>()..onError = onError;
 
     verifyZeroInteractions(onError);
 
@@ -178,7 +178,7 @@ void main() {
   });
 
   test('no onError fallbacks to zone', () {
-    final eventEmitter = EventEmitter<String>();
+    final eventEmitter = _EventEmitter<String>();
     const clickEvent = 'click';
     eventEmitter.on(clickEvent, (_) => throw StateError('error'));
 
@@ -197,3 +197,5 @@ void main() {
 class ErrorListener extends Mock {
   void call(Object error, StackTrace? stackTrace);
 }
+
+class _EventEmitter<T> with EventEmitter<T> {}

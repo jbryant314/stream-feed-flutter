@@ -17,7 +17,7 @@ void main() {
       expect(error.message, message);
     });
 
-    test('.fromDioError', () {
+    test('.fromDioException', () {
       const code = 333;
       const statusCode = 666;
       const message = 'test-error-message';
@@ -28,7 +28,7 @@ void main() {
         statusCode: statusCode,
       );
 
-      final dioError = DioError(
+      final dioException = DioException(
         requestOptions: options,
         response: Response(
           requestOptions: options,
@@ -36,7 +36,7 @@ void main() {
           data: json.encode(data.toJson()),
         ),
       );
-      final error = StreamFeedsNetworkError.fromDioError(dioError);
+      final error = StreamFeedsNetworkError.fromDioException(dioException);
       expect(error, isNotNull);
       expect(error.code, code);
       expect(error.message, message);

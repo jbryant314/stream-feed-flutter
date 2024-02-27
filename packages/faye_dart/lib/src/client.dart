@@ -117,9 +117,7 @@ class FayeClient with Extensible, TimeoutHelper, EquatableMixin {
       _closeWebSocketChannel();
     }
     final uri = Uri.parse(baseUrl);
-    _webSocketChannel =
-        webSocketChannelProvider?.call(uri, protocols: protocols) ??
-            WebSocketChannel.connect(uri, protocols: protocols);
+    _webSocketChannel = webSocketChannelProvider?.call(uri, protocols: protocols) ?? WebSocketChannel.connect(uri, protocols: protocols);
     _subscribeToWebsocket();
   }
 
@@ -154,10 +152,10 @@ class FayeClient with Extensible, TimeoutHelper, EquatableMixin {
   }
 
   void _onDataReceived(dynamic data) {
-    final json = jsonDecode(data) as List;
+    final json = jsonDecode(data) as List<Map<String, Object?>>;
     Iterable<Message>? messages;
     try {
-      messages = json.map((it) => Message.fromJson(it));
+      messages = json.map(Message.fromJson);
     } catch (_) {}
 
     if (messages == null) return;
@@ -412,8 +410,7 @@ class FayeClient with Extensible, TimeoutHelper, EquatableMixin {
 
   void _handleAdvice(Advice advice) {
     _advice = advice;
-    if (_advice.reconnect == Advice.handshake &&
-        state != FayeClientState.disconnected) {
+    if (_advice.reconnect == Advice.handshake && state != FayeClientState.disconnected) {
       _state = FayeClientState.unconnected;
       _clientId = null;
       _cycleConnection();

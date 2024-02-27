@@ -14,17 +14,13 @@ class ReactionsAPI {
 
   /// Add reaction
   Future<Reaction> add(Token token, Reaction reaction) async {
-    checkArgument(reaction.activityId != null || reaction.parent != null,
-        'Reaction has to either have an activity ID or parent');
-    checkArgument(reaction.activityId == null || reaction.parent == null,
-        "Reaction can't have both activity ID and parent");
+    checkArgument(reaction.activityId != null || reaction.parent != null, 'Reaction has to either have an activity ID or parent');
+    checkArgument(reaction.activityId == null || reaction.parent == null, "Reaction can't have both activity ID and parent");
     if (reaction.activityId != null) {
-      checkArgument(reaction.activityId!.isNotEmpty,
-          "Reaction activity ID can't be empty");
+      checkArgument(reaction.activityId!.isNotEmpty, "Reaction activity ID can't be empty");
     }
     if (reaction.parent != null) {
-      checkArgument(
-          reaction.parent!.isNotEmpty, "Reaction parent can't be empty");
+      checkArgument(reaction.parent!.isNotEmpty, "Reaction parent can't be empty");
     }
     checkNotNull(reaction.kind, "Reaction kind can't be null");
     checkArgument(reaction.kind!.isNotEmpty, "Reaction kind can't be empty");
@@ -79,9 +75,7 @@ class ReactionsAPI {
       headers: {'Authorization': '$token'},
       queryParameters: options,
     );
-    final data = (result.data!['results'] as List)
-        .map((e) => Reaction.fromJson(e))
-        .toList(growable: false);
+    final data = (result.data!['results'] as List<Map<String, dynamic>>).map(Reaction.fromJson).toList(growable: false);
     return data;
   }
 
@@ -126,9 +120,7 @@ class ReactionsAPI {
   /// Update a reaction
   Future<Reaction> update(Token token, Reaction updatedReaction) async {
     checkArgument(updatedReaction.id!.isNotEmpty, "Reaction id can't be empty");
-    final targetFeedIds = updatedReaction.targetFeeds
-        ?.map((e) => e.toString())
-        .toList(growable: false);
+    final targetFeedIds = updatedReaction.targetFeeds?.map((e) => e.toString()).toList(growable: false);
 
     final reactionId = updatedReaction.id;
     final data = updatedReaction.data;

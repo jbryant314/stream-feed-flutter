@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:stream_feed/src/core/api/analytics_api.dart';
 import 'package:stream_feed/src/core/http/stream_http_client.dart';
 import 'package:stream_feed/src/core/http/token.dart';
@@ -16,7 +15,7 @@ import 'package:stream_feed/src/core/util/token_helper.dart';
 /// - Viewing another user's profile page
 /// - Searching for a certain user/content/topic/etc.
 /// {@endtemplate}
-class StreamAnalytics extends Equatable {
+class StreamAnalytics {
   /// [StreamAnalytics] constructor:
   ///
   /// {@macro analytics}
@@ -41,11 +40,9 @@ class StreamAnalytics extends Equatable {
   //TODO: get user?
 
   /// Set user id and alias
-  void setUser({required String id, required String alias}) =>
-      userData = UserData(id, alias);
+  void setUser({required String id, required String alias}) => userData = UserData(id, alias);
 
-  List<T> _validateAndNormalizeUserData<T extends Event>(List<T> events) =>
-      events.map((e) {
+  List<T> _validateAndNormalizeUserData<T extends Event>(List<T> events) => events.map((e) {
         if (e.userData != null || userData != null) {
           return e.copyWith(userData: e.userData ?? userData) as T;
         }
@@ -80,14 +77,12 @@ class StreamAnalytics extends Equatable {
   ///   ),
   /// );
   /// ```
-  Future<void> trackImpression(Impression impression) =>
-      trackImpressions([impression]);
+  Future<void> trackImpression(Impression impression) => trackImpressions([impression]);
 
   /// Send [Impression] events
   Future<void> trackImpressions(List<Impression> impressions) async {
     final impressionDataList = _validateAndNormalizeUserData(impressions);
-    final token =
-        userToken ?? TokenHelper.buildAnalytics(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildAnalytics(secret!, TokenAction.write);
     await _analytics.trackImpressions(token, impressionDataList);
   }
 
@@ -112,21 +107,12 @@ class StreamAnalytics extends Equatable {
   ///   ),
   /// );
   /// ```
-  Future<void> trackEngagement(Engagement engagement) =>
-      trackEngagements([engagement]);
+  Future<void> trackEngagement(Engagement engagement) => trackEngagements([engagement]);
 
   /// Send [Engagement] event
   Future<void> trackEngagements(List<Engagement> engagements) {
     final engagementDataList = _validateAndNormalizeUserData(engagements);
-    final token =
-        userToken ?? TokenHelper.buildAnalytics(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildAnalytics(secret!, TokenAction.write);
     return _analytics.trackEngagements(token, engagementDataList);
   }
-
-  @override
-  List<Object?> get props => [
-        secret,
-        userToken,
-        userData,
-      ];
 }

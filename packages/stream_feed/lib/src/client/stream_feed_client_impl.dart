@@ -121,8 +121,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
     },
   };
 
-  late final FayeClient _faye = FayeClient(fayeUrl, logLevel: logLevel)
-    ..addExtension(_authExtension);
+  late final FayeClient _faye = FayeClient(fayeUrl, logLevel: logLevel)..addExtension(_authExtension);
 
   late final _subscriptions = <String, _FeedSubscription>{};
 
@@ -136,8 +135,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
     Map<String, Object?>? extraData,
   }) async {
     this.userToken = userToken;
-    final createdUser =
-        await this.user(user.id!).getOrCreate(extraData ?? user.data ?? {});
+    final createdUser = await this.user(user.id!).getOrCreate(extraData ?? user.data ?? {});
     return _currentUser = await createdUser.profile();
   }
 
@@ -154,22 +152,19 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
   @override
   CollectionsClient get collections {
     assert(_ensureCredentials(), '');
-    return CollectionsClient(_api.collections,
-        userToken: userToken, secret: secret);
+    return CollectionsClient(_api.collections, userToken: userToken, secret: secret);
   }
 
   @override
   ReactionsClient get reactions {
     assert(_ensureCredentials(), '');
-    return ReactionsClient(_api.reactions,
-        userToken: userToken, secret: secret);
+    return ReactionsClient(_api.reactions, userToken: userToken, secret: secret);
   }
 
   @override
   PersonalizationClient get personalization {
     assert(_ensureCredentials(), '');
-    return PersonalizationClient(_api.personalization,
-        userToken: userToken, secret: secret);
+    return PersonalizationClient(_api.personalization, userToken: userToken, secret: secret);
   }
 
   @override
@@ -187,8 +182,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
   @override
   ImageStorageClient get images {
     assert(_ensureCredentials(), '');
-    return ImageStorageClient(_api.images,
-        userToken: userToken, secret: secret);
+    return ImageStorageClient(_api.images, userToken: userToken, secret: secret);
   }
 
   Future<Subscription> _feedSubscriber(
@@ -287,8 +281,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
       runner == Runner.server,
       "You can't use the `frontendToken` method client side",
     );
-    return TokenHelper.buildFrontendToken(secret!, userId,
-        expiresAt: expiresAt);
+    return TokenHelper.buildFrontendToken(secret!, userId, expiresAt: expiresAt);
   }
 
   @override
@@ -308,8 +301,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
     if (runner == Runner.client) {
       _logger.warning('We advice using `client.createUser` only server-side');
     }
-    final token =
-        userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.write);
     return _api.users.create(token, id, data, getOrCreate: getOrCreate);
   }
 
@@ -320,8 +312,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
       _logger.warning('We advice using `client.getUser` only server-side');
     }
 
-    final token =
-        userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.read);
     return _api.users.get(token, id, withFollowCounts: withFollowCounts);
   }
 
@@ -331,8 +322,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
     if (runner == Runner.client) {
       _logger.warning('We advice using `client.updateUser` only server-side');
     }
-    final token =
-        userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.write);
     return _api.users.update(token, id, data);
   }
 
@@ -342,8 +332,7 @@ class StreamFeedClientImpl with EquatableMixin implements StreamFeedClient {
     if (runner == Runner.client) {
       _logger.warning('We advice using `client.deleteUser` only server-side');
     }
-    final token =
-        userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.delete);
+    final token = userToken ?? TokenHelper.buildUsersToken(secret!, TokenAction.delete);
     return _api.users.delete(token, id);
   }
 
