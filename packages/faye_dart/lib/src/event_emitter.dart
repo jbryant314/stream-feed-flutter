@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+
 import 'package:meta/meta.dart';
 
 /// A listener that can be added to a [EventEmitter] using
@@ -80,12 +81,10 @@ mixin EventEmitter<T> {
   }
 
   /// Binds the [listener] to the passed [event] to be invoked at most [limit].
-  void on(String event, Listener<T> listener, {int? limit}) =>
-      addListener(event, listener, limit: limit);
+  void on(String event, Listener<T> listener, {int? limit}) => addListener(event, listener, limit: limit);
 
   /// Binds the [listener] to the passed [event] to be invoked at most once.
-  void once(String event, Listener<T> listener) =>
-      addListener(event, listener, limit: 1);
+  void once(String event, Listener<T> listener) => addListener(event, listener, limit: 1);
 
   /// Binds the [listener] to the passed [event] to be invoked at most [limit].
   void addListener(String event, Listener<T> listener, {int? limit}) {

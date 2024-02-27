@@ -23,9 +23,7 @@ class Message with EquatableMixin {
       connectionType: json['connectionType'] as String?,
       version: json['version'] as String?,
       minimumVersion: json['minimumVersion'] as String?,
-      supportedConnectionTypes: (json['supportedConnectionTypes'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
+      supportedConnectionTypes: (json['supportedConnectionTypes'] as List?)?.map((e) => e as String).toList(),
       advice: advice == null ? null : Advice.fromJson(advice),
       successful: json['successful'] as bool?,
       subscription: json['subscription'] as String?,

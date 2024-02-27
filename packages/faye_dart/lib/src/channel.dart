@@ -19,8 +19,7 @@ class Channel with EquatableMixin, EventEmitter<Message> {
 
   void bind(String event, Listener<Message> listener) => on(event, listener);
 
-  void unbind(String event, Listener<Message> listener) =>
-      removeListener(event, listener);
+  void unbind(String event, Listener<Message> listener) => removeListener(event, listener);
 
   void trigger(String event, Message message) => emit(event, message);
 
@@ -44,8 +43,7 @@ class Channel with EquatableMixin, EventEmitter<Message> {
   }
 
   static bool isValid(String name) {
-    return RegExp(grammar.channelName).hasMatch(name) ||
-        RegExp(grammar.channelPattern).hasMatch(name);
+    return RegExp(grammar.channelName).hasMatch(name) || RegExp(grammar.channelPattern).hasMatch(name);
   }
 
   static List<String>? parse(String name) {
