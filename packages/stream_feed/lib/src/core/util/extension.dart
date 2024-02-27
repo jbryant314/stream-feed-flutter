@@ -25,6 +25,7 @@ extension StringX on String {
 }
 
 /// Throws an [ArgumentError] if the given [expression] is `false`.
+// ignore: avoid_positional_boolean_parameters
 void checkArgument(bool expression, [String? message]) {
   if (!expression) {
     throw ArgumentError(message);
