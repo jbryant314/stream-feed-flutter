@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:stream_feed/src/core/api/analytics_api.dart';
 import 'package:stream_feed/src/core/http/stream_http_client.dart';
 import 'package:stream_feed/src/core/http/token.dart';
@@ -16,7 +15,7 @@ import 'package:stream_feed/src/core/util/token_helper.dart';
 /// - Viewing another user's profile page
 /// - Searching for a certain user/content/topic/etc.
 /// {@endtemplate}
-class StreamAnalytics extends Equatable {
+class StreamAnalytics {
   /// [StreamAnalytics] constructor:
   ///
   /// {@macro analytics}
@@ -116,11 +115,4 @@ class StreamAnalytics extends Equatable {
     final token = userToken ?? TokenHelper.buildAnalytics(secret!, TokenAction.write);
     return _analytics.trackEngagements(token, engagementDataList);
   }
-
-  @override
-  List<Object?> get props => [
-        secret,
-        userToken,
-        userData,
-      ];
 }
