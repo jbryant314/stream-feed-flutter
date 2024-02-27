@@ -67,9 +67,7 @@ class PersonalizationClient {
     String resource, {
     Map<String, dynamic>? params,
   }) {
-    final token = userToken ??
-        TokenHelper.buildPersonalizationToken(secret!, TokenAction.any,
-            userId: '*');
+    final token = userToken ?? TokenHelper.buildPersonalizationToken(secret!, TokenAction.any, userId: '*');
     return _personalization.get(token, resource, params);
   }
 
@@ -80,8 +78,7 @@ class PersonalizationClient {
     Map<String, Object>? payload,
   }) {
     checkNotNull(secret, "You can't use this method client side");
-    final token =
-        TokenHelper.buildPersonalizationToken(secret!, TokenAction.write);
+    final token = TokenHelper.buildPersonalizationToken(secret!, TokenAction.write);
     return _personalization.post(token, resource, params, payload);
   }
 
@@ -90,8 +87,7 @@ class PersonalizationClient {
     Map<String, Object>? params,
   }) {
     checkNotNull(secret, "You can't use this method client side");
-    final token =
-        TokenHelper.buildPersonalizationToken(secret!, TokenAction.delete);
+    final token = TokenHelper.buildPersonalizationToken(secret!, TokenAction.delete);
     return _personalization.delete(token, resource, params);
   }
 }

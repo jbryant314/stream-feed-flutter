@@ -28,8 +28,7 @@ class OpenGraphData extends Equatable {
   });
 
   /// Create a new instance from a json
-  factory OpenGraphData.fromJson(Map<String, dynamic> json) =>
-      _$OpenGraphDataFromJson(json);
+  factory OpenGraphData.fromJson(Map<String, dynamic> json) => _$OpenGraphDataFromJson(json);
 
   ///	Value of the title OG field.
   ///
@@ -121,8 +120,7 @@ class OgImage extends Equatable {
   });
 
   /// Create a new instance from a json
-  factory OgImage.fromJson(Map<String, dynamic> json) =>
-      _$OgImageFromJson(json);
+  factory OgImage.fromJson(Map<String, dynamic> json) => _$OgImageFromJson(json);
 
   /// Value of the image OG field.
   final String? image;
@@ -182,8 +180,7 @@ class OgVideo extends Equatable {
   });
 
   /// Create a new instance from a json
-  factory OgVideo.fromJson(Map<String, dynamic> json) =>
-      _$OgVideoFromJson(json);
+  factory OgVideo.fromJson(Map<String, dynamic> json) => _$OgVideoFromJson(json);
 
   /// Value of the image OG field.
   final String? image;
@@ -239,8 +236,7 @@ class OgAudio extends Equatable {
   });
 
   /// Create a new instance from a json
-  factory OgAudio.fromJson(Map<String, dynamic> json) =>
-      _$OgAudioFromJson(json);
+  factory OgAudio.fromJson(Map<String, dynamic> json) => _$OgAudioFromJson(json);
 
   /// Serialize to json the [Audio] object
   Map<String, dynamic> toJson() => _$OgAudioToJson(this);

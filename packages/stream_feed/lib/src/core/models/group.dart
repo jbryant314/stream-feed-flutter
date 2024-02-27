@@ -54,8 +54,7 @@ class Group<T> extends Equatable {
       ];
 
   /// Serialize to json
-  Map<String, dynamic> toJson(Object Function(T) toJsonT) =>
-      _$GroupToJson(this, toJsonT);
+  Map<String, dynamic> toJson(Object Function(T) toJsonT) => _$GroupToJson(this, toJsonT);
 }
 
 /// A notification group.
@@ -103,6 +102,5 @@ class NotificationGroup<T> extends Group<T> {
 
   /// Serialize to json
   @override
-  Map<String, dynamic> toJson(Object Function(T) toJsonT) =>
-      _$NotificationGroupToJson(this, toJsonT);
+  Map<String, dynamic> toJson(Object Function(T) toJsonT) => _$NotificationGroupToJson(this, toJsonT);
 }

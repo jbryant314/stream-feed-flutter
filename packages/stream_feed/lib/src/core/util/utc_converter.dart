@@ -6,12 +6,10 @@ class DateTimeUTCConverter implements JsonConverter<DateTime?, String?> {
   static final DateFormat format = DateFormat('yyyy-MM-ddTHH:mm:ssZ');
 
   @override
-  DateTime? fromJson(String? json) =>
-      json == null ? null : format.parse(json, true);
+  DateTime? fromJson(String? json) => json == null ? null : format.parse(json, true);
 
   @override
-  String? toJson(DateTime? json) =>
-      json == null ? null : formatDateWithOffset(json);
+  String? toJson(DateTime? json) => json == null ? null : formatDateWithOffset(json);
 }
 
 String formatDateWithOffset(DateTime date) {

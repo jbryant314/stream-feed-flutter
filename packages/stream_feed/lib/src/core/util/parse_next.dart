@@ -12,12 +12,8 @@ NextParams parseNext(String next) {
       withRecentReactions: queryParameters['withRecentReactions'] as bool?,
       withReactionCounts: queryParameters['withReactionCounts'] as bool?,
       withOwnChildren: queryParameters['withOwnChildren'] as bool?,
-      recentReactionsLimit: queryParameters['recentReactionsLimit'] != null
-          ? int.tryParse(queryParameters['recentReactionsLimit']!)
-          : null,
+      recentReactionsLimit: queryParameters['recentReactionsLimit'] != null ? int.tryParse(queryParameters['recentReactionsLimit']!) : null,
       reactionKindsFilter: queryParameters['reactionKindsFilter'],
-      offset: queryParameters['offset'] != null
-          ? int.tryParse(queryParameters['offset']!)
-          : null);
+      offset: queryParameters['offset'] != null ? int.tryParse(queryParameters['offset']!) : null);
   return nextParams;
 }

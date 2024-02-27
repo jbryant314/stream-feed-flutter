@@ -68,8 +68,7 @@ class StreamApiImpl implements StreamAPI {
   PersonalizationAPI? _personalizationAPI;
 
   @override
-  PersonalizationAPI get personalization =>
-      _personalizationAPI ??= PersonalizationAPI(_client);
+  PersonalizationAPI get personalization => _personalizationAPI ??= PersonalizationAPI(_client);
 
   @override
   Future<OpenGraphData> openGraph(Token token, String targetUrl) async {

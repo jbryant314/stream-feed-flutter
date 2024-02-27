@@ -3,8 +3,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart' show MultipartFile;
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:stream_feed/src/core/platform_detector/platform_detector.dart'
-    show CurrentPlatform;
+import 'package:stream_feed/src/core/platform_detector/platform_detector.dart' show CurrentPlatform;
 import 'package:stream_feed/src/core/util/extension.dart';
 import 'package:stream_feed/stream_feed.dart';
 
@@ -39,8 +38,7 @@ class AttachmentFile extends Equatable {
         );
 
   /// Create a new instance from a JSON object
-  factory AttachmentFile.fromJson(Map<String, dynamic> json) =>
-      _$AttachmentFileFromJson(json);
+  factory AttachmentFile.fromJson(Map<String, dynamic> json) => _$AttachmentFileFromJson(json);
 
   /// The absolute path for a cached copy of this file.
   ///

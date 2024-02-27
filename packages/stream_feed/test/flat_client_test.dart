@@ -37,16 +37,15 @@ void main() {
         'ranking': ranking,
       };
 
-      when(() => api.personalizedFeed(token, options)).thenAnswer((_) async =>
-          const PersonalizedFeed(
-              limit: limit, offset: offset, version: 'whatever'));
+      when(() => api.personalizedFeed(token, options)).thenAnswer((_) async => const PersonalizedFeed(limit: limit, offset: offset, version: 'whatever'));
       await client.personalizedFeed(
-          limit: limit,
-          offset: offset,
-          marker: marker,
-          filter: filter,
-          ranking: ranking,
-          flags: flags);
+        limit: limit,
+        offset: offset,
+        marker: marker,
+        filter: filter,
+        ranking: ranking,
+        flags: flags,
+      );
 
       verify(() => api.personalizedFeed(token, options)).called(1);
     });
@@ -54,9 +53,7 @@ void main() {
     test('getEnrichedActivity', () async {
       const limit = 1;
       const activityId = 'e561de8f-00f1-11e4-b400-0cc47a024be0';
-      final filter = Filter()
-          .idLessThanOrEqual(activityId)
-          .idGreaterThanOrEqual(activityId);
+      final filter = Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId);
       final options = {
         'limit': limit,
         'offset': Default.offset, //TODO:add session everywhere
@@ -65,30 +62,26 @@ void main() {
       };
 
       final rawActivities = [jsonFixture('enriched_activity.json')];
-      when(() => api.getEnrichedActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
-      final activities = await client.getEnrichedActivityDetail<String, String,
-          String, String>(activityId);
+      when(() => api.getEnrichedActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
+      final activities = await client.getEnrichedActivityDetail<String, String, String, String>(activityId);
 
       expect(
-          activities,
-          rawActivities
-              .map((e) => GenericEnrichedActivity<String, String, String,
-                  String>.fromJson(e))
-              .toList(growable: false)
-              .first);
+        activities,
+        rawActivities.map(GenericEnrichedActivity<String, String, String, String>.fromJson).toList(growable: false).first,
+      );
       verify(() => api.getEnrichedActivities(token, feedId, options)).called(1);
     });
 
     test('getActivityDetail', () async {
       const limit = 1;
       const activityId = 'e561de8f-00f1-11e4-b400-0cc47a024be0';
-      final filter = Filter()
-          .idLessThanOrEqual(activityId)
-          .idGreaterThanOrEqual(activityId);
+      final filter = Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId);
       final options = {
         'limit': limit,
         'offset': Default.offset,
@@ -96,19 +89,19 @@ void main() {
         ...Default.marker.params,
       };
       final rawActivities = [jsonFixture('group.json')];
-      when(() => api.getActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
+      when(() => api.getActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
       final activities = await client.getActivityDetail(activityId);
 
       expect(
-          activities,
-          rawActivities
-              .map((e) => Activity.fromJson(e))
-              .toList(growable: false)
-              .first);
+        activities,
+        rawActivities.map(Activity.fromJson).toList(growable: false).first,
+      );
       verify(() => api.getActivities(token, feedId, options)).called(1);
     });
 
@@ -116,18 +109,16 @@ void main() {
       const limit = 5;
       const offset = 0;
       const ranking = 'popularity';
-      final filter =
-          Filter().idLessThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final filter = Filter().idLessThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
       final options = {
         'limit': limit,
         'offset': offset,
         ...filter.params,
-        'ranking': ranking
+        'ranking': ranking,
       };
 
       final json = {
-        'next':
-            '/api/v1.0/feed/user/1/?api_key=8rxdnw8pjmvb&id_lt=b253bfa1-83b3-11ec-8dc7-0a5c4613b2ff&limit=25',
+        'next': '/api/v1.0/feed/user/1/?api_key=8rxdnw8pjmvb&id_lt=b253bfa1-83b3-11ec-8dc7-0a5c4613b2ff&limit=25',
         'results': [
           {
             'actor': '1',
@@ -140,10 +131,8 @@ void main() {
         'duration': '419.81ms'
       };
       final paginatedActivities = PaginatedActivities.fromJson(json);
-      when(() => api.paginatedActivities(token, feedId, options))
-          .thenAnswer((_) async => paginatedActivities);
-      final result = await client.getPaginatedEnrichedActivities(
-          limit: limit, offset: offset, filter: filter, ranking: ranking);
+      when(() => api.paginatedActivities(token, feedId, options)).thenAnswer((_) async => paginatedActivities);
+      final result = await client.getPaginatedEnrichedActivities(limit: limit, offset: offset, filter: filter, ranking: ranking);
 
       expect(result, paginatedActivities);
       verify(() => api.paginatedActivities(token, feedId, options)).called(1);
@@ -153,40 +142,37 @@ void main() {
       const limit = 5;
       const offset = 0;
       const ranking = 'popularity';
-      final filter =
-          Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final filter = Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
       final options = {
         'limit': limit,
         'offset': offset,
         ...filter.params,
-        'ranking': ranking
+        'ranking': ranking,
       };
 
       final rawActivities = [jsonFixture('activity.json')];
-      when(() => api.getActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
-      final activities = await client.getActivities(
-          limit: limit, offset: offset, filter: filter, ranking: ranking);
+      when(() => api.getActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
+      final activities = await client.getActivities(limit: limit, offset: offset, filter: filter, ranking: ranking);
 
       expect(
-          activities,
-          rawActivities
-              .map((e) => Activity.fromJson(e))
-              .toList(growable: false));
+        activities,
+        rawActivities.map(Activity.fromJson).toList(growable: false),
+      );
       verify(() => api.getActivities(token, feedId, options)).called(1);
     });
 
     test('getEnrichedActivities', () async {
       const limit = 5;
       const offset = 0;
-      final filter =
-          Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final filter = Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
       const ranking = 'popularity';
-      final flags =
-          EnrichmentFlags().withRecentReactions().withReactionCounts();
+      final flags = EnrichmentFlags().withRecentReactions().withReactionCounts();
       final options = {
         'limit': limit,
         'offset': offset,
@@ -197,15 +183,14 @@ void main() {
       };
 
       final rawActivities = [jsonFixture('enriched_activity.json')];
-      when(() => api.getEnrichedActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(
-                path: '',
-              ),
-              statusCode: 200));
-      final activities =
-          await client.getEnrichedActivities<String, String, String, String>(
+      when(() => api.getEnrichedActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
+      final activities = await client.getEnrichedActivities<String, String, String, String>(
         limit: limit,
         offset: offset,
         filter: filter,
@@ -214,11 +199,9 @@ void main() {
       );
 
       expect(
-          activities,
-          rawActivities
-              .map((e) => GenericEnrichedActivity<String, String, String,
-                  String>.fromJson(e))
-              .toList(growable: false));
+        activities,
+        rawActivities.map(GenericEnrichedActivity<String, String, String, String>.fromJson).toList(growable: false),
+      );
       verify(() => api.getEnrichedActivities(token, feedId, options)).called(1);
     });
   });

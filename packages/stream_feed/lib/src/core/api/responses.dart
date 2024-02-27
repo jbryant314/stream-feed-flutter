@@ -11,17 +11,10 @@ class _BaseResponse {
 @JsonSerializable()
 class ErrorResponse extends _BaseResponse {
   /// Create a new instance from a json
-  const ErrorResponse(
-      {String? duration,
-      this.message,
-      this.code,
-      this.statusCode,
-      this.moreInfo})
-      : super(duration);
+  const ErrorResponse({String? duration, this.message, this.code, this.statusCode, this.moreInfo}) : super(duration);
 
   /// Create a new instance from a json
-  factory ErrorResponse.fromJson(Map<String, dynamic> json) =>
-      _$ErrorResponseFromJson(json);
+  factory ErrorResponse.fromJson(Map<String, dynamic> json) => _$ErrorResponseFromJson(json);
 
   /// The http error code
   final int? code;

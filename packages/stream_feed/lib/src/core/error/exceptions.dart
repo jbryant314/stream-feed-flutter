@@ -36,17 +36,10 @@ class StreamApiException implements Exception {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is StreamApiException &&
-          runtimeType == other.runtimeType &&
-          body == other.body &&
-          jsonData == other.jsonData &&
-          status == other.status &&
-          _code == other._code;
+      identical(this, other) || other is StreamApiException && runtimeType == other.runtimeType && body == other.body && jsonData == other.jsonData && status == other.status && _code == other._code;
 
   @override
-  int get hashCode =>
-      body.hashCode ^ jsonData.hashCode ^ status.hashCode ^ _code.hashCode;
+  int get hashCode => body.hashCode ^ jsonData.hashCode ^ status.hashCode ^ _code.hashCode;
 
   @override
   String toString() =>

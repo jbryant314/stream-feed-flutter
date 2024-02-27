@@ -12,8 +12,7 @@ class FollowRelation extends Equatable {
   const FollowRelation({required this.source, required this.target});
 
   /// Create a new instance from a json
-  factory FollowRelation.fromJson(Map<String, dynamic> json) =>
-      _$FollowRelationFromJson(json);
+  factory FollowRelation.fromJson(Map<String, dynamic> json) => _$FollowRelationFromJson(json);
 
   /// The combination of feed slug and user id separated by a colon
   ///
@@ -34,21 +33,13 @@ class FollowRelation extends Equatable {
 @JsonSerializable()
 class UnFollowRelation extends FollowRelation {
   /// Builds an [UnFollowRelation].
-  const UnFollowRelation(
-      {required String source, required String target, this.keepHistory})
-      : super(source: source, target: target);
+  const UnFollowRelation({required String source, required String target, this.keepHistory}) : super(source: source, target: target);
 
   /// Create a new instance from a json
-  factory UnFollowRelation.fromJson(Map<String, dynamic> json) =>
-      _$UnFollowRelationFromJson(json);
+  factory UnFollowRelation.fromJson(Map<String, dynamic> json) => _$UnFollowRelationFromJson(json);
 
   /// Builds an [UnFollowRelation] from a Follow.
-  factory UnFollowRelation.fromFollow(
-          FollowRelation follow, bool? keepHistory) =>
-      UnFollowRelation(
-          source: follow.source,
-          target: follow.target,
-          keepHistory: keepHistory);
+  factory UnFollowRelation.fromFollow(FollowRelation follow, bool? keepHistory) => UnFollowRelation(source: follow.source, target: follow.target, keepHistory: keepHistory);
 
   /// Whether to keep activities from the target feed in this feed.
   final bool? keepHistory;

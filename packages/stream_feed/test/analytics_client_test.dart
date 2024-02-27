@@ -58,8 +58,7 @@ void main() {
         // expect(resp, isNotNull);
         // expect(resp.statusCode, 200);
 
-        verify(() => api.trackImpressions(token, [updatedImpression]))
-            .called(1);
+        verify(() => api.trackImpressions(token, [updatedImpression])).called(1);
       },
     );
   });
@@ -96,8 +95,7 @@ void main() {
 
         await client.trackEngagement(updatedEngagement);
 
-        verify(() => api.trackEngagements(token, [updatedEngagement]))
-            .called(1);
+        verify(() => api.trackEngagements(token, [updatedEngagement])).called(1);
       },
     );
   });

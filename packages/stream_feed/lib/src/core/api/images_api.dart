@@ -56,8 +56,7 @@ class ImagesAPI {
 
   /// {@macro imageRefreshUrl}
   Future<String?> refreshUrl(Token token, String targetUrl) async {
-    final result = await _client.post(Routes.imagesUrl,
-        headers: {'Authorization': '$token'}, data: {'url': targetUrl});
+    final result = await _client.post(Routes.imagesUrl, headers: {'Authorization': '$token'}, data: {'url': targetUrl});
     return result.data['url'];
   }
 }

@@ -35,8 +35,7 @@ class Reaction extends Equatable {
   });
 
   /// Create a new instance from a JSON object
-  factory Reaction.fromJson(Map<String, dynamic> json) =>
-      _$ReactionFromJson(json);
+  factory Reaction.fromJson(Map<String, dynamic> json) => _$ReactionFromJson(json);
 
   /// Reaction ID
   @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
@@ -152,22 +151,7 @@ class Reaction extends Equatable {
       );
 
   @override
-  List<Object?> get props => [
-        id,
-        kind,
-        activityId,
-        userId,
-        parent,
-        createdAt,
-        updatedAt,
-        targetFeeds,
-        user,
-        targetFeedsExtraData,
-        data,
-        latestChildren,
-        childrenCounts,
-        ownChildren
-      ];
+  List<Object?> get props => [id, kind, activityId, userId, parent, createdAt, updatedAt, targetFeeds, user, targetFeedsExtraData, data, latestChildren, childrenCounts, ownChildren];
 
   /// Serialize to json
   Map<String, dynamic> toJson() => _$ReactionToJson(this);

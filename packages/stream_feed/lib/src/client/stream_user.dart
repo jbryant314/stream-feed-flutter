@@ -87,16 +87,14 @@ class StreamUser with EquatableMixin {
     Map<String, Object?> data, {
     bool getOrCreate = false,
   }) async {
-    final token =
-        _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.write);
+    final token = _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.write);
     final user = await _users.create(token, id, data, getOrCreate: getOrCreate);
     _enrichUser(user);
     return this;
   }
 
   /// Get or Create a new user in stream
-  Future<StreamUser> getOrCreate(Map<String, Object?> data) =>
-      create(data, getOrCreate: true);
+  Future<StreamUser> getOrCreate(Map<String, Object?> data) => create(data, getOrCreate: true);
 
   /// Delete the user
   ///
@@ -106,14 +104,12 @@ class StreamUser with EquatableMixin {
   /// ```
   /// API docs: [removing-users](https://getstream.io/activity-feeds/docs/flutter-dart/users_introduction/?language=dart#removing-users)
   Future<void> delete() {
-    final token =
-        _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.delete);
+    final token = _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.delete);
     return _users.delete(token, id);
   }
 
   /// Get the user profile, it includes the follow counts by default
-  Future<StreamUser> profile({bool withFollowCounts = true}) =>
-      get(withFollowCounts: withFollowCounts);
+  Future<StreamUser> profile({bool withFollowCounts = true}) => get(withFollowCounts: withFollowCounts);
 
   /// Get the user data
   ///
@@ -125,10 +121,8 @@ class StreamUser with EquatableMixin {
   Future<StreamUser> get({
     bool withFollowCounts = false,
   }) async {
-    final token =
-        _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.read);
-    final user =
-        await _users.get(token, id, withFollowCounts: withFollowCounts);
+    final token = _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.read);
+    final user = await _users.get(token, id, withFollowCounts: withFollowCounts);
     _enrichUser(user);
     return this;
   }
@@ -145,8 +139,7 @@ class StreamUser with EquatableMixin {
   /// ```
   /// API docs: [updating-users](https://getstream.io/activity-feeds/docs/flutter-dart/users_introduction/?language=dart#updating-users)
   Future<StreamUser> update(Map<String, Object?> data) async {
-    final token =
-        _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.write);
+    final token = _userToken ?? TokenHelper.buildUsersToken(_secret!, TokenAction.write);
     final user = await _users.update(token, id, data);
     _enrichUser(user);
     return this;

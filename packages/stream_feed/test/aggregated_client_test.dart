@@ -25,9 +25,7 @@ void main() {
     test('getEnrichedActivityDetail', () async {
       const limit = 1;
       const activityId = 'e561de8f-00f1-11e4-b400-0cc47a024be0';
-      final filter = Filter()
-          .idLessThanOrEqual(activityId)
-          .idGreaterThanOrEqual(activityId);
+      final filter = Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId);
       final options = {
         'limit': limit,
         'offset': Default.offset, //TODO:add session everywhere
@@ -36,23 +34,22 @@ void main() {
       };
 
       final rawActivities = [jsonFixture('group.json')];
-      when(() => api.getEnrichedActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
-      final activities = await client.getEnrichedActivityDetail<String, String,
-          String, String>(activityId);
+      when(() => api.getEnrichedActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
+      final activities = await client.getEnrichedActivityDetail<String, String, String, String>(activityId);
 
       expect(
           activities,
           rawActivities
-              .map((e) => Group<
-                      GenericEnrichedActivity<String, String, String,
-                          String>>.fromJson(
-                  e,
-                  (o) => GenericEnrichedActivity<String, String, String,
-                      String>.fromJson(o as Map<String, dynamic>)))
+              .map((e) => Group<GenericEnrichedActivity<String, String, String, String>>.fromJson(
+                    e,
+                    (o) => GenericEnrichedActivity<String, String, String, String>.fromJson(o! as Map<String, dynamic>),
+                  ))
               .toList(growable: false)
               .first);
       verify(() => api.getEnrichedActivities(token, feedId, options)).called(1);
@@ -61,9 +58,7 @@ void main() {
     test('getActivityDetail', () async {
       const limit = 1;
       const activityId = 'e561de8f-00f1-11e4-b400-0cc47a024be0';
-      final filter = Filter()
-          .idLessThanOrEqual(activityId)
-          .idGreaterThanOrEqual(activityId);
+      final filter = Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId);
       final options = {
         'limit': limit,
         'offset': Default.offset,
@@ -71,18 +66,22 @@ void main() {
         ...Default.marker.params,
       };
       final rawActivities = [jsonFixture('group.json')];
-      when(() => api.getActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
+      when(() => api.getActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
       final activities = await client.getActivityDetail(activityId);
 
       expect(
           activities,
           rawActivities
-              .map((e) => Group.fromJson(e,
-                  (json) => Activity.fromJson(json as Map<String, dynamic>?)))
+              .map((e) => Group.fromJson(
+                    e,
+                    (json) => Activity.fromJson(json as Map<String, dynamic>?),
+                  ))
               .toList(growable: false)
               .first);
       verify(() => api.getActivities(token, feedId, options)).called(1);
@@ -92,8 +91,7 @@ void main() {
       const limit = 5;
       const offset = 0;
       final marker = ActivityMarker().allSeen();
-      final filter =
-          Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final filter = Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
       final options = {
         'limit': limit,
         'offset': offset,
@@ -101,20 +99,24 @@ void main() {
         ...marker.params,
       };
       final rawActivities = [jsonFixture('group.json')];
-      when(() => api.getActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
-      final activities = await client.getActivities(
-          limit: limit, offset: offset, filter: filter, marker: marker);
+      when(() => api.getActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
+      final activities = await client.getActivities(limit: limit, offset: offset, filter: filter, marker: marker);
 
       expect(
-          activities,
-          rawActivities
-              .map((e) => Group.fromJson(e,
-                  (json) => Activity.fromJson(json as Map<String, dynamic>?)))
-              .toList(growable: false));
+        activities,
+        rawActivities
+            .map((e) => Group.fromJson(
+                  e,
+                  (json) => Activity.fromJson(json as Map<String, dynamic>?),
+                ))
+            .toList(growable: false),
+      );
       verify(() => api.getActivities(token, feedId, options)).called(1);
     });
 
@@ -122,39 +124,32 @@ void main() {
       const limit = 5;
       const offset = 0;
       final marker = ActivityMarker().allSeen();
-      final filter =
-          Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
-      final flags =
-          EnrichmentFlags().withRecentReactions().withReactionCounts();
-      final options = {
-        'limit': limit,
-        'offset': offset,
-        ...filter.params,
-        ...marker.params,
-        ...flags.params
-      };
+      final filter = Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final flags = EnrichmentFlags().withRecentReactions().withReactionCounts();
+      final options = {'limit': limit, 'offset': offset, ...filter.params, ...marker.params, ...flags.params};
 
       final rawActivities = [jsonFixture('group_enriched_activity.json')];
-      when(() => api.getEnrichedActivities(token, feedId, options))
-          .thenAnswer((_) async => Response(
-              data: {'results': rawActivities},
-              requestOptions: RequestOptions(),
-              statusCode: 200));
-      final activities =
-          await client.getEnrichedActivities<String, String, String, String>(
-              limit: limit,
-              offset: offset,
-              filter: filter,
-              marker: marker,
-              flags: flags);
+      when(() => api.getEnrichedActivities(token, feedId, options)).thenAnswer(
+        (_) async => Response(
+          data: {'results': rawActivities},
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+        ),
+      );
+      final activities = await client.getEnrichedActivities<String, String, String, String>(
+        limit: limit,
+        offset: offset,
+        filter: filter,
+        marker: marker,
+        flags: flags,
+      );
 
       expect(
           activities,
           rawActivities
               .map((e) => Group.fromJson(
                     e,
-                    (json) => GenericEnrichedActivity<String, String, String,
-                        String>.fromJson(json as Map<String, dynamic>?),
+                    (json) => GenericEnrichedActivity<String, String, String, String>.fromJson(json as Map<String, dynamic>?),
                   ))
               .toList(growable: false));
       verify(() => api.getEnrichedActivities(token, feedId, options)).called(1);

@@ -63,8 +63,7 @@ void main() {
         targetFeeds: targetFeeds,
       );
 
-      when(() => api.update(token, updatedReaction))
-          .thenAnswer((_) async => updatedReaction);
+      when(() => api.update(token, updatedReaction)).thenAnswer((_) async => updatedReaction);
       await client.update(reactionId, data: data, targetFeeds: targetFeeds);
       verify(() => api.update(token, updatedReaction)).called(1);
     });
@@ -79,8 +78,7 @@ void main() {
     test('filter', () async {
       const lookupAttr = LookupAttribute.activityId;
       const lookupValue = 'ed2837a6-0a3b-4679-adc1-778a1704852d';
-      final filter =
-          Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final filter = Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
       const kind = 'like';
       const limit = 5;
       const activityId = 'activityId';
@@ -96,24 +94,16 @@ void main() {
           targetFeeds: targetFeeds,
         )
       ];
-      final flags = EnrichmentFlags()
-          .withReactionCounts()
-          .withOwnChildren()
-          .withOwnReactions();
+      final flags = EnrichmentFlags().withReactionCounts().withOwnChildren().withOwnReactions();
       final options = {
         'limit': limit,
         ...filter.params,
         ...flags.params,
         'with_activity_data': lookupAttr == LookupAttribute.activityId,
       };
-      when(() => api.filter(
-              token, lookupAttr, lookupValue, filter, limit, kind, options))
-          .thenAnswer((_) async => reactions);
-      await client.filter(lookupAttr, lookupValue,
-          filter: filter, limit: limit, kind: kind, flags: flags);
-      verify(() => api.filter(
-              token, lookupAttr, lookupValue, filter, limit, kind, options))
-          .called(1);
+      when(() => api.filter(token, lookupAttr, lookupValue, filter, limit, kind, options)).thenAnswer((_) async => reactions);
+      await client.filter(lookupAttr, lookupValue, filter: filter, limit: limit, kind: kind, flags: flags);
+      verify(() => api.filter(token, lookupAttr, lookupValue, filter, limit, kind, options)).called(1);
     });
 
     test('addChild', () async {
@@ -132,17 +122,16 @@ void main() {
       when(() => api.add(token, reaction)).thenAnswer((_) async => reaction);
 
       expect(
-          await client.addChild(kind, parentId,
-              userId: userId, data: data, targetFeeds: targetFeeds),
-          reaction);
+        await client.addChild(kind, parentId, userId: userId, data: data, targetFeeds: targetFeeds),
+        reaction,
+      );
       verify(() => api.add(token, reaction)).called(1);
     });
 
     test('paginatedReactions', () async {
       const lookupAttr = LookupAttribute.activityId;
       const lookupValue = 'ed2837a6-0a3b-4679-adc1-778a1704852d';
-      final filter =
-          Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
+      final filter = Filter().idGreaterThan('e561de8f-00f1-11e4-b400-0cc47a024be0');
       const EnrichmentFlags? flags = null;
       const kind = 'like';
       const limit = 5;
@@ -161,10 +150,11 @@ void main() {
       ];
       final duration = const Duration(minutes: 2).toString();
       final paginatedReactions = PaginatedReactions(
-          next: 'next',
-          results: reactions,
-          activity: const GenericEnrichedActivity(),
-          duration: duration);
+        next: 'next',
+        results: reactions,
+        activity: const GenericEnrichedActivity(),
+        duration: duration,
+      );
       when(() => api.paginatedFilter(
             token,
             lookupAttr,

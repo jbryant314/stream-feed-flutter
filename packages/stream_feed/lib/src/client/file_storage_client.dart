@@ -59,8 +59,7 @@ class FileStorageClient {
     OnSendProgress? onSendProgress,
     CancelToken? cancelToken,
   }) async {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.write);
     return _files.upload(
       token,
       file,
@@ -79,8 +78,7 @@ class FileStorageClient {
   /// - [url] : the url of the file you want to delete
   /// API docs: [delete](https://getstream.io/activity-feeds/docs/flutter-dart/files_introduction/?language=dart#delete)
   Future<void> delete(String url) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.delete);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.delete);
     return _files.delete(token, url);
   }
 
@@ -92,8 +90,7 @@ class FileStorageClient {
   /// contact us.
   /// {@endtemplate}
   Future<String?> refreshUrl(String targetUrl) {
-    final token =
-        userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildFilesToken(secret!, TokenAction.read);
     return _files.refreshUrl(token, targetUrl);
   }
 }

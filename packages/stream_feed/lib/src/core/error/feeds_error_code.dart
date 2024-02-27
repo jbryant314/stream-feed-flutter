@@ -143,28 +143,20 @@ const _errorCodeWithDescription = {
   FeedsError.pagination: MapEntry(4, 'Pagination error.'),
   FeedsError.input: MapEntry(4, 'There is an error with the user input data.'),
   FeedsError.feedConfig: MapEntry(6, 'Missing or mis-configured feed.'),
-  FeedsError.missingUser:
-      MapEntry(11, 'Triggered when there is an issue with ranking the feed.'),
-  FeedsError.missingRanking:
-      MapEntry(12, 'The ranking isn\'t configured for the given feed.'),
-  FeedsError.missingActivity:
-      MapEntry(13, 'The aggregation format isn\'t correct.'),
+  FeedsError.missingUser: MapEntry(11, 'Triggered when there is an issue with ranking the feed.'),
+  FeedsError.missingRanking: MapEntry(12, 'The ranking isn\'t configured for the given feed.'),
+  FeedsError.missingActivity: MapEntry(13, 'The aggregation format isn\'t correct.'),
   FeedsError.accessKey: MapEntry(2, 'Triggered when the API key is invalid.'),
   FeedsError.signature: MapEntry(3, 'The payload signature is invalid.'),
-  FeedsError.authenticationFailed:
-      MapEntry(3, 'The payload signature is invalid.'),
+  FeedsError.authenticationFailed: MapEntry(3, 'The payload signature is invalid.'),
   FeedsError.appSuspended: MapEntry(7, 'The app is suspended.'),
   FeedsError.notAllowed: MapEntry(17, 'Requested action is not allowed.'),
   FeedsError.doesNotExist: MapEntry(16, 'Resource not found.'),
-  FeedsError.methodNotAllowed:
-      MapEntry(17, 'The requested method is not allowed.'),
-  FeedsError.conflict: MapEntry(22,
-      'There is a conflict (e,g. when trying to create an existing resource)'),
-  FeedsError.inputErrorBodySizeExceeded:
-      MapEntry(18, 'Input body size limit exceeded.'),
+  FeedsError.methodNotAllowed: MapEntry(17, 'The requested method is not allowed.'),
+  FeedsError.conflict: MapEntry(22, 'There is a conflict (e,g. when trying to create an existing resource)'),
+  FeedsError.inputErrorBodySizeExceeded: MapEntry(18, 'Input body size limit exceeded.'),
   FeedsError.rateLimit: MapEntry(9, 'Rate limit reached.'),
-  FeedsError.internalSystem:
-      MapEntry(-1, 'Triggered when something goes wrong in our system.'),
+  FeedsError.internalSystem: MapEntry(-1, 'Triggered when something goes wrong in our system.'),
 };
 
 const _authenticationErrors = [
@@ -174,8 +166,7 @@ const _authenticationErrors = [
 ];
 
 ///
-FeedsError? feedsErrorCodeFromCode(int code) => _errorCodeWithDescription.keys
-    .firstWhereOrNull((key) => _errorCodeWithDescription[key]!.key == code);
+FeedsError? feedsErrorCodeFromCode(int code) => _errorCodeWithDescription.keys.firstWhereOrNull((key) => _errorCodeWithDescription[key]!.key == code);
 
 /// Extensions on [FeedsError].
 extension FeedsErrorCodeX on FeedsError {

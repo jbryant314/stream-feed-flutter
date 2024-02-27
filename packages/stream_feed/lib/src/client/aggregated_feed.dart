@@ -29,11 +29,7 @@ class AggregatedFeed extends Feed {
 
   /// Retrieves one activity from a feed
   Future<Group<Activity>> getActivityDetail(String activityId) async {
-    final activities = await getActivities(
-        limit: 1,
-        filter: Filter()
-            .idLessThanOrEqual(activityId)
-            .idGreaterThanOrEqual(activityId));
+    final activities = await getActivities(limit: 1, filter: Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId));
     return activities.first;
   }
 
@@ -54,21 +50,16 @@ class AggregatedFeed extends Feed {
       ...marker?.params ?? Default.marker.params,
     };
 
-    final token = userToken ??
-        TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
+    final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getActivities(token, feedId, options);
-    final data = (result.data!['results'] as List)
-        .map((e) => Group.fromJson(
-            e, (json) => Activity.fromJson(json as Map<String, dynamic>?)))
-        .toList(growable: false);
+    final data = (result.data!['results'] as List).map((e) => Group.fromJson(e, (json) => Activity.fromJson(json as Map<String, dynamic>?))).toList(growable: false);
     return data;
   }
 
   /// Retrieve activities with reaction enrichment
   ///
   /// {@macro filter}
-  Future<List<Group<GenericEnrichedActivity<A, Ob, T, Or>>>>
-      getEnrichedActivities<A, Ob, T, Or>({
+  Future<List<Group<GenericEnrichedActivity<A, Ob, T, Or>>>> getEnrichedActivities<A, Ob, T, Or>({
     int? limit,
     int? offset,
     String? session,
@@ -83,8 +74,7 @@ class AggregatedFeed extends Feed {
       ...marker?.params ?? Default.marker.params,
       ...flags?.params ?? Default.enrichmentFlags.params,
     };
-    final token = userToken ??
-        TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
+    final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getEnrichedActivities(token, feedId, options);
     final data = (result.data['results'] as List)
         .map((e) => Group.fromJson(
@@ -98,18 +88,12 @@ class AggregatedFeed extends Feed {
   }
 
   /// Retrieves one enriched activity from a feed
-  Future<Group<GenericEnrichedActivity<A, Ob, T, Or>>>
-      getEnrichedActivityDetail<A, Ob, T, Or>(String activityId) async {
-    final activities = await getEnrichedActivities<A, Ob, T, Or>(
-        limit: 1,
-        filter: Filter()
-            .idLessThanOrEqual(activityId)
-            .idGreaterThanOrEqual(activityId));
+  Future<Group<GenericEnrichedActivity<A, Ob, T, Or>>> getEnrichedActivityDetail<A, Ob, T, Or>(String activityId) async {
+    final activities = await getEnrichedActivities<A, Ob, T, Or>(limit: 1, filter: Filter().idLessThanOrEqual(activityId).idGreaterThanOrEqual(activityId));
     return activities.first;
   }
 
-  Future<PaginatedActivitiesGroup<A, Ob, T, Or>>
-      getPaginatedActivities<A, Ob, T, Or>({
+  Future<PaginatedActivitiesGroup<A, Ob, T, Or>> getPaginatedActivities<A, Ob, T, Or>({
     int? limit,
     int? offset,
     String? session,
@@ -124,8 +108,7 @@ class AggregatedFeed extends Feed {
       ...marker?.params ?? Default.marker.params,
       ...flags?.params ?? Default.enrichmentFlags.params,
     };
-    final token = userToken ??
-        TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
+    final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     return feed.paginatedActivitiesGroup(token, feedId, options);
   }
 }

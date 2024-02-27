@@ -41,8 +41,7 @@ class CollectionsClient {
   final String? secret;
   final CollectionsAPI _collections;
 
-  CollectionEntry entry(String collection, String entryId) =>
-      CollectionEntry(collection: collection, id: entryId);
+  CollectionEntry entry(String collection, String entryId) => CollectionEntry(collection: collection, id: entryId);
 
   /// Add item to collection
   ///
@@ -84,8 +83,7 @@ class CollectionsClient {
       collection: collection,
       data: data,
     );
-    final token = userToken ??
-        TokenHelper.buildCollectionsToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildCollectionsToken(secret!, TokenAction.write);
     return _collections.add(token, userId, entry);
   }
 
@@ -103,8 +101,7 @@ class CollectionsClient {
   /// ```
   /// API docs: [removing-collections](https://getstream.io/activity-feeds/docs/flutter-dart/collections_introduction/?language=dart#removing-collections)
   Future<void> delete(String collection, String entryId) {
-    final token = userToken ??
-        TokenHelper.buildCollectionsToken(secret!, TokenAction.delete);
+    final token = userToken ?? TokenHelper.buildCollectionsToken(secret!, TokenAction.delete);
     return _collections.delete(token, collection, entryId);
   }
 
@@ -119,8 +116,7 @@ class CollectionsClient {
   /// final collection = await client.collections.get('food', 'cheese-burger');
   /// ```
   Future<CollectionEntry> get(String collection, String entryId) {
-    final token = userToken ??
-        TokenHelper.buildCollectionsToken(secret!, TokenAction.read);
+    final token = userToken ?? TokenHelper.buildCollectionsToken(secret!, TokenAction.read);
     return _collections.get(token, collection, entryId);
   }
 
@@ -145,8 +141,7 @@ class CollectionsClient {
     CollectionEntry entryCopy, {
     String? userId,
   }) {
-    final token = userToken ??
-        TokenHelper.buildCollectionsToken(secret!, TokenAction.write);
+    final token = userToken ?? TokenHelper.buildCollectionsToken(secret!, TokenAction.write);
     return _collections.update(token, userId, entryCopy);
   }
 
@@ -167,8 +162,7 @@ class CollectionsClient {
   /// API docs : [delete_many](https://getstream.io/activity-feeds/docs/flutter-dart/collections_batch/?language=dart#delete_many)
   Future<void> deleteMany(String collection, Iterable<String> ids) {
     //TODO: assert that secret is not null since it is a serverside method
-    final token =
-        TokenHelper.buildCollectionsToken(secret!, TokenAction.delete);
+    final token = TokenHelper.buildCollectionsToken(secret!, TokenAction.delete);
     return _collections.deleteMany(token, collection, ids);
   }
 
@@ -186,8 +180,7 @@ class CollectionsClient {
   /// ```
   ///
   /// API docs: [select](https://getstream.io/activity-feeds/docs/flutter-dart/collections_batch/?language=dart#select)
-  Future<List<CollectionEntry>> select(
-      String collection, Iterable<String> ids) {
+  Future<List<CollectionEntry>> select(String collection, Iterable<String> ids) {
     final token = TokenHelper.buildCollectionsToken(secret!, TokenAction.read);
     return _collections.select(token, collection, ids);
   }
@@ -214,8 +207,7 @@ class CollectionsClient {
   /// ]);
   /// ```
   /// API docs : [upsert](https://getstream.io/activity-feeds/docs/flutter-dart/collections_batch/?language=dart#upsert)
-  Future<List<CollectionEntry>> upsert(
-      String collection, Iterable<CollectionEntry> entries) {
+  Future<List<CollectionEntry>> upsert(String collection, Iterable<CollectionEntry> entries) {
     final token = TokenHelper.buildCollectionsToken(secret!, TokenAction.write);
     return _collections.upsert(token, collection, entries);
   }

@@ -43,19 +43,9 @@ class RealtimeMessage<A, Ob, T, Or> extends Equatable {
   ]) =>
       _$RealtimeMessageFromJson<A, Ob, T, Or>(
         json,
-        fromJsonA ??
-            (jsonA) => (A == User)
-                ? User.fromJson(jsonA! as Map<String, dynamic>) as A
-                : jsonA as A,
-        fromJsonOb ??
-            (jsonOb) => (Ob == CollectionEntry)
-                ? CollectionEntry.fromJson(jsonOb! as Map<String, dynamic>)
-                    as Ob
-                : jsonOb as Ob,
-        fromJsonT ??
-            (jsonT) => (T == Activity)
-                ? Activity.fromJson(jsonT! as Map<String, dynamic>) as T
-                : jsonT as T,
+        fromJsonA ?? (jsonA) => (A == User) ? User.fromJson(jsonA! as Map<String, dynamic>) as A : jsonA as A,
+        fromJsonOb ?? (jsonOb) => (Ob == CollectionEntry) ? CollectionEntry.fromJson(jsonOb! as Map<String, dynamic>) as Ob : jsonOb as Ob,
+        fromJsonT ?? (jsonT) => (T == Activity) ? Activity.fromJson(jsonT! as Map<String, dynamic>) as T : jsonT as T,
         fromJsonOr ??
             (jsonOr) {
               if (Or == User) {
