@@ -15,7 +15,7 @@ typedef Listener<T> = void Function(T data);
 /// It exists merely for error reporting, and should not be used otherwise.
 typedef ErrorListener = void Function(Object error, StackTrace? stackTrace);
 
-class EventEmitter<T> {
+mixin EventEmitter<T> {
   /// Mapping of events to a list of event handlers
   late final _events = <String, LinkedList<_ListenerEntry<T>>>{};
 
