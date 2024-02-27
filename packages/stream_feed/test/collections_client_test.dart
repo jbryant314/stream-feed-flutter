@@ -42,9 +42,7 @@ void main() {
       when(() => api.delete(token, collection, entryId))
           .thenAnswer((_) async => Response(
               data: {},
-              requestOptions: RequestOptions(
-                path: '',
-              ),
+              requestOptions: RequestOptions(),
               statusCode: 200));
       await client.delete(collection, entryId);
       verify(() => api.delete(token, collection, entryId)).called(1);
@@ -100,9 +98,7 @@ void main() {
       when(() => api.deleteMany(token, collection, entryIds))
           .thenAnswer((_) async => Response<Map>(
               data: {}, //TODO: flaky
-              requestOptions: RequestOptions(
-                path: '',
-              ),
+              requestOptions: RequestOptions(),
               statusCode: 200));
       await clientWithSecret.deleteMany(collection, entryIds);
       verify(() => api.deleteMany(token, collection, entryIds)).called(1);

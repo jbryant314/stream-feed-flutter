@@ -39,9 +39,7 @@ void main() {
       when(() => api.getEnrichedActivities(token, feedId, options))
           .thenAnswer((_) async => Response(
               data: {'results': rawActivities},
-              requestOptions: RequestOptions(
-                path: '',
-              ),
+              requestOptions: RequestOptions(),
               statusCode: 200));
       final activities = await client.getEnrichedActivityDetail<String, String,
           String, String>(activityId);
@@ -76,9 +74,7 @@ void main() {
       when(() => api.getActivities(token, feedId, options))
           .thenAnswer((_) async => Response(
               data: {'results': rawActivities},
-              requestOptions: RequestOptions(
-                path: '',
-              ),
+              requestOptions: RequestOptions(),
               statusCode: 200));
       final activities = await client.getActivityDetail(activityId);
 
@@ -108,9 +104,7 @@ void main() {
       when(() => api.getActivities(token, feedId, options))
           .thenAnswer((_) async => Response(
               data: {'results': rawActivities},
-              requestOptions: RequestOptions(
-                path: '',
-              ),
+              requestOptions: RequestOptions(),
               statusCode: 200));
       final activities = await client.getActivities(
           limit: limit, offset: offset, filter: filter, marker: marker);
@@ -144,9 +138,7 @@ void main() {
       when(() => api.getEnrichedActivities(token, feedId, options))
           .thenAnswer((_) async => Response(
               data: {'results': rawActivities},
-              requestOptions: RequestOptions(
-                path: '',
-              ),
+              requestOptions: RequestOptions(),
               statusCode: 200));
       final activities =
           await client.getEnrichedActivities<String, String, String, String>(

@@ -40,9 +40,7 @@ void main() {
       const targetUrl = 'targetUrl';
       when(() => api.delete(token, targetUrl)).thenAnswer((_) async => Response(
           data: {},
-          requestOptions: RequestOptions(
-            path: '',
-          ),
+          requestOptions: RequestOptions(),
           statusCode: 200));
       await client.delete(targetUrl);
       verify(() => api.delete(token, targetUrl)).called(1);

@@ -47,9 +47,7 @@ void main() {
       const id = 'john-doe';
       when(() => api.delete(token, id)).thenAnswer((_) async => Response(
           data: {},
-          requestOptions: RequestOptions(
-            path: '',
-          ),
+          requestOptions: RequestOptions(),
           statusCode: 200));
       await client.delete();
       verify(() => api.delete(token, id)).called(1);

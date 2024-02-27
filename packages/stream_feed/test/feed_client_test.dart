@@ -16,9 +16,7 @@ void main() {
     final client = Feed(feedId, api, userToken: token);
     final dummyResponse = Response(
         data: {},
-        requestOptions: RequestOptions(
-          path: '',
-        ),
+        requestOptions: RequestOptions(),
         statusCode: 200);
 
     test('addActivity', () async {
