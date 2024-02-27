@@ -70,7 +70,6 @@ Map<String, dynamic> _$GenericEnrichedActivityToJson<A, Ob, T, Or>(
     }
   }
 
-  writeNotNull('id', readonly(instance.id));
   writeNotNull('actor', _$nullableGenericToJson(instance.actor, toJsonA));
   val['verb'] = instance.verb;
   writeNotNull('object', _$nullableGenericToJson(instance.object, toJsonOb));
@@ -78,13 +77,6 @@ Map<String, dynamic> _$GenericEnrichedActivityToJson<A, Ob, T, Or>(
   writeNotNull('target', _$nullableGenericToJson(instance.target, toJsonT));
   writeNotNull('time', const DateTimeUTCConverter().toJson(instance.time));
   writeNotNull('origin', _$nullableGenericToJson(instance.origin, toJsonOr));
-  writeNotNull('to', readonly(instance.to));
-  writeNotNull('score', readonly(instance.score));
-  writeNotNull('analytics', readonly(instance.analytics));
-  writeNotNull('extra_context', readonly(instance.extraContext));
-  writeNotNull('reaction_counts', readonly(instance.reactionCounts));
-  writeNotNull('own_reactions', readonly(instance.ownReactions));
-  writeNotNull('latest_reactions', readonly(instance.latestReactions));
   writeNotNull('extra_data', instance.extraData);
   return val;
 }
