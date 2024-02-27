@@ -99,7 +99,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       queryParameters: options,
     );
-    return PaginatedActivities<A, Ob, T, Or>.fromJson(response.data as Map<String, dynamic>);
+    return PaginatedActivities<A, Ob, T, Or>.fromJson(response.data! as Map<String, dynamic>);
   }
 
   /// Retrieve paginated activities
@@ -113,7 +113,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       queryParameters: options,
     );
-    return PaginatedActivitiesGroup<A, Ob, T, Or>.fromJson(response.data as Map<String, dynamic>);
+    return PaginatedActivitiesGroup<A, Ob, T, Or>.fromJson(response.data! as Map<String, dynamic>);
   }
 
   /// Retrieve the number of followers and following feed stats of the current

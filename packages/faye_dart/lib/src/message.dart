@@ -18,7 +18,7 @@ class Message with EquatableMixin {
   factory Message.fromJson(Map<String, Object?> json) {
     final advice = json['advice'] as Map<String, dynamic>?;
     final message = Message(
-      json['channel'] as String,
+      json['channel']! as String,
       clientId: json['clientId'] as String?,
       connectionType: json['connectionType'] as String?,
       version: json['version'] as String?,
