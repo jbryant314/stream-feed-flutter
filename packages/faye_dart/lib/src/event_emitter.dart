@@ -126,7 +126,7 @@ mixin EventEmitter<T> {
     assert(_debugIsMounted(), '');
     final listeners = _events[event];
     if (listeners == null) {
-      throw 'Event not available';
+      throw Exception('Event not available');
     }
     return listeners.isNotEmpty;
   }
