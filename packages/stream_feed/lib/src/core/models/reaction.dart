@@ -38,7 +38,7 @@ class Reaction extends Equatable {
   factory Reaction.fromJson(Map<String, dynamic> json) => _$ReactionFromJson(json);
 
   /// Reaction ID
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final String? id;
 
   /// The type of reaction (eg. like, comment, ...).
@@ -67,7 +67,7 @@ class Reaction extends Equatable {
   final DateTime? createdAt;
 
   ///	When the reaction was last updated.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final DateTime? updatedAt;
 
   /// The feeds that should receive a notification activity
@@ -89,15 +89,15 @@ class Reaction extends Equatable {
   final Map<String, Object>? data;
 
   /// Children reactions, grouped by reaction type.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, List<Reaction>>? latestChildren;
 
   /// Children reactions, grouped by reaction type.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, List<Reaction>>? ownChildren;
 
   /// Child reaction count, grouped by reaction kind
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, int>? childrenCounts;
 
   /// Known top level fields.

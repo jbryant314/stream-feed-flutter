@@ -85,7 +85,7 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
       );
 
   /// The Stream id of the activity.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final String? id;
 
   /// The actor performing the activity.
@@ -141,31 +141,31 @@ class GenericEnrichedActivity<A, Ob, T, Or> extends Equatable {
   /// should be copied.
   ///
   /// One way to think about it is as the CC functionality of email.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final List<String>? to;
 
   ///
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final double? score;
 
   ///
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, Object>? analytics;
 
   ///
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, Object>? extraContext;
 
   /// Include reaction counts to activities.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, int>? reactionCounts;
 
   /// Include reactions added by current user to all activities.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, List<Reaction>>? ownReactions;
 
   /// Include recent reactions to activities.
-  @JsonKey(includeIfNull: false, toJson: Serializer.readOnly)
+  @JsonKey(includeIfNull: false, includeToJson: false)
   final Map<String, List<Reaction>>? latestReactions;
 
   /// Map of custom user extraData
