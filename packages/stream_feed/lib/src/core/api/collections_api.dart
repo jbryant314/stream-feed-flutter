@@ -83,7 +83,7 @@ class CollectionsAPI {
         'foreign_ids': entryIds.map((id) => '$collection:$id').join(','),
       },
     );
-    final data = (result.data!['response']['data'] as List).map((e) => CollectionEntry.fromJson(e)).toList(growable: false);
+    final data = (result.data!['response']['data'] as List<Map<String, dynamic>>).map(CollectionEntry.fromJson).toList(growable: false);
     return data;
   }
 
@@ -119,7 +119,7 @@ class CollectionsAPI {
       },
     );
 
-    final data = (response.data!['data'][collection] as List).map((e) => CollectionEntry.fromJson(e)).toList(growable: false);
+    final data = (response.data!['data'][collection] as List<Map<String, dynamic>>).map(CollectionEntry.fromJson).toList(growable: false);
     return data;
   }
 }

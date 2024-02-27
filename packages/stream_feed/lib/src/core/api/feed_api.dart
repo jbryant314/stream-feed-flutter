@@ -32,7 +32,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       data: {'activities': activities},
     );
-    final data = (result.data!['activities'] as List).map((e) => Activity.fromJson(e)).toList(growable: false);
+    final data = (result.data!['activities'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
@@ -156,7 +156,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       queryParameters: {'limit': limit, 'offset': offset, if (feedIds.isNotEmpty) 'filter': feedIds.map((it) => it.toString()).join(',')},
     );
-    final data = (result.data!['results'] as List).map((e) => Follow.fromJson(e)).toList(growable: false);
+    final data = (result.data!['results'] as List<Map<String, dynamic>>).map(Follow.fromJson).toList(growable: false);
     return data;
   }
 
@@ -176,7 +176,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       queryParameters: {'limit': limit, 'offset': offset, if (feedIds.isNotEmpty) 'filter': feedIds.map((it) => it.toString()).join(',')},
     );
-    final data = (result.data['results'] as List).map((e) => Follow.fromJson(e)).toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>>).map(Follow.fromJson).toList(growable: false);
     return data;
   }
 
@@ -230,7 +230,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       data: {'changes': updates},
     );
-    final data = (result.data!['activities'] as List).map((e) => Activity.fromJson(e)).toList(growable: false);
+    final data = (result.data!['activities'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
@@ -252,7 +252,7 @@ class FeedAPI {
       headers: {'Authorization': '$token'},
       data: {'changes': updates},
     );
-    final data = (result.data!['activities'] as List).map((e) => Activity.fromJson(e)).toList(growable: false);
+    final data = (result.data!['activities'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 

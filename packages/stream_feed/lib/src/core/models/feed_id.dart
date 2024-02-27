@@ -29,7 +29,10 @@ class FeedId extends Equatable {
 
   /// Takes a list of feed ids of type `List<String>`
   /// and returns a list of feed ids of type `List<FeedId>`
-  static List<FeedId>? fromIds(List? ids) => ids?.map((e) => FeedId.id(e)).toList(growable: false);
+  static List<FeedId>? fromIds(List? ids //needs to be List instead of List<String> for generated code
+          ) =>
+      // ignore: unnecessary_lambdas
+      ids?.map((id) => FeedId.id(id)).toList(growable: false);
 
   /// Takes a list of feed ids of type `List<FeedId>`
   /// and returns a list of feed ids as `List<String>`

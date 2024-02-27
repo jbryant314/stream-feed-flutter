@@ -75,7 +75,7 @@ class ReactionsAPI {
       headers: {'Authorization': '$token'},
       queryParameters: options,
     );
-    final data = (result.data!['results'] as List).map((e) => Reaction.fromJson(e)).toList(growable: false);
+    final data = (result.data!['results'] as List<Map<String, dynamic>>).map(Reaction.fromJson).toList(growable: false);
     return data;
   }
 

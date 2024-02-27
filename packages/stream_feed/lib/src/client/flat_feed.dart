@@ -66,7 +66,7 @@ class FlatFeed extends Feed {
     };
     final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getActivities(token, feedId, options);
-    final data = (result.data!['results'] as List).map((e) => Activity.fromJson(e)).toList(growable: false);
+    final data = (result.data!['results'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
@@ -111,7 +111,7 @@ class FlatFeed extends Feed {
     };
     final token = userToken ?? TokenHelper.buildFeedToken(secret!, TokenAction.read, feedId);
     final result = await feed.getEnrichedActivities(token, feedId, options);
-    final data = (result.data['results'] as List).map((e) => GenericEnrichedActivity<A, Ob, T, Or>.fromJson(e)).toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(GenericEnrichedActivity<A, Ob, T, Or>.fromJson).toList(growable: false);
     return data;
   }
 

@@ -57,7 +57,7 @@ class BatchAPI {
       headers: {'Authorization': '$token'},
       queryParameters: {'ids': ids.join(',')},
     );
-    final data = (result.data!['results'] as List).map((e) => Activity.fromJson(e)).toList(growable: false);
+    final data = (result.data!['results'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
@@ -72,7 +72,7 @@ class BatchAPI {
         'timestamps': pairs.map((it) => it.time.toUtc().toIso8601String()).join(','),
       },
     );
-    final data = (result.data['results'] as List).map((e) => Activity.fromJson(e)).toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(Activity.fromJson).toList(growable: false);
     return data;
   }
 
@@ -84,7 +84,7 @@ class BatchAPI {
       headers: {'Authorization': '$token'},
       queryParameters: {'ids': ids.join(',')},
     );
-    final data = (result.data['results'] as List).map((e) => GenericEnrichedActivity<A, Ob, T, Or>.fromJson(e)).toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(GenericEnrichedActivity<A, Ob, T, Or>.fromJson).toList(growable: false);
     return data;
   }
 
@@ -102,7 +102,7 @@ class BatchAPI {
         'timestamps': pairs.map((it) => it.time.toUtc().toIso8601String()).join(','),
       },
     );
-    final data = (result.data['results'] as List).map((e) => GenericEnrichedActivity<A, Ob, T, Or>.fromJson(e)).toList(growable: false);
+    final data = (result.data['results'] as List<Map<String, dynamic>?>).map(GenericEnrichedActivity<A, Ob, T, Or>.fromJson).toList(growable: false);
     return data;
   }
 
