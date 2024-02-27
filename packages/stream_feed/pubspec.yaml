@@ -18,7 +18,6 @@ dependencies:
     git:
       url: git@github.com:Keyclic/stream-feed-flutter.git
       path: packages/faye_dart
-      ref: chore/dependencies
   http_parser: ^4.0.0
   intl: ^0.18.0
   jose: ^0.3.4
