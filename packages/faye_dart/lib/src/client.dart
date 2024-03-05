@@ -152,7 +152,7 @@ class FayeClient with Extensible, TimeoutHelper, EquatableMixin {
   }
 
   void _onDataReceived(dynamic data) {
-    final json = jsonDecode(data) as List<Map<String, Object?>>;
+    final json = List<Map<String, Object?>>.from(jsonDecode(data));
     Iterable<Message>? messages;
     try {
       messages = json.map(Message.fromJson);
