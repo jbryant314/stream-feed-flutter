@@ -14,10 +14,10 @@ dependencies:
   stream_feed:
     path: ../packages/stream_feed
   timeago: ^3.0.2
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+#
+#dev_dependencies:
+#  flutter_test:
+#    sdk: flutter
 
 flutter:
   uses-material-design: true
