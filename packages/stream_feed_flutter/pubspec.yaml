@@ -22,7 +22,7 @@ dependencies:
 #    path: ../stream_feed_flutter_core
   timeago: ^3.0.2
   url_launcher: ^6.0.6
-  video_thumbnail: ^0.4.3
+  video_thumbnail: ^0.5.3
 
 dependency_overrides:
   photo_view:
