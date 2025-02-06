@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   animations: ^2.0.2
-  chewie: ^1.8.0
+#  chewie: ^1.8.0
   equatable: ^2.0.2
   flutter:
     sdk: flutter
